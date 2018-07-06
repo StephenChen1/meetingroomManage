@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "dao.StaffDao">
+  
+  <!-- 根据id查询员工 -->
+  <select id="queryStaffById" resultType = "staff" parameterType = "String">
+    select 
+       staff_number,name,level,birthday,phone,address
+    from
+       staff
+    where staff_number = #{id}
+  </select>
+  
+  
+</mapper>
