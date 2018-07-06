@@ -12,7 +12,7 @@
 		<!-- 页面转发至登录首页 -->
 	   <script >
 	   		 alert("00000");
-	         /* window.location.href='staff/test' */
+	         window.location.href='staff/test'
 	   </script>
 	</body>	
 </html>
