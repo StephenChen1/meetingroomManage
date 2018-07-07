@@ -17,7 +17,7 @@
 	   
 	   
 	 <br>
-	 <button class = "btn btn_login" id = "serch">查找</button>   
+	 <button class = "btn btn_login" id = "search">查找</button>   
 	</div>
 
 	<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
