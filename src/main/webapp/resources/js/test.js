@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	
-	$("#serch").click(function(){
+	$("#search").click(function(){
 		
 		var id = $("#staffId").val();
 		alert(id);
@@ -11,7 +11,7 @@ $(document).ready(function(){
 		
 		$.ajax({
 	    	type : "post",
-	    	url:"serch",
+	    	url:"search",
 	    	contentType:"application/json",
 	        data:JSON.stringify(data),
 	        success:function(result){        	

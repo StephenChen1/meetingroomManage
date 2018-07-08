@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import dtoin.ID;
+import dtoin.LoginForm;
 import entity.Staff;
 import service.StaffService;
 
@@ -17,7 +18,8 @@ public class StaffController {
 	@Autowired
 	private StaffService staffService ;
 	
-	@RequestMapping("/serch")
+	//根据id查找用户信息
+	@RequestMapping("/search")
 	@ResponseBody
 	public Staff getStaffTest(@RequestBody ID id){
 		String id1 = id.getId();
@@ -28,10 +30,7 @@ public class StaffController {
 	}
 	
 	
-	@RequestMapping("/test")
-	public String toTestjsp(){
-		
-		return "test";
-	}
+	
+	
 	
 }
