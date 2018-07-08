@@ -14,6 +14,9 @@ $(document).ready(function(){
 	    	url:"search",
 	    	contentType:"application/json",
 	        data:JSON.stringify(data),
+	    	//contentType:"application/json",
+	        //contentType:"application/x-www-form-urlencoded",
+	    	data:JSON.stringify(data),
 	        success:function(result){        	
 	        	alert("result:"+ result.staffNumber+result.name);	
 	        }
