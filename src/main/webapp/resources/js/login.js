@@ -3,6 +3,7 @@
         $.navigate = function (position,id) {
             //函数内容
         	//alert("position:" + position);
+        	//alert("id:" + id);
         	var url = "./navigate?position="+position+"&id="+id ;
     		//把请求转发
         	window.location.href=url;
