@@ -39,8 +39,8 @@ public class JwtServiceImpl implements JwtService {
 	}
 
 	/**
-	 * 验证前端提交的token
-	 * 使用场景：需要验证用户身份，获取用户staff_number的时候
+	 * 验证前端提交的token 使用场景：需要验证用户身份，获取用户staff_number的时候
+	 * 
 	 * @param token
 	 * @return 验证失败返回null，验证成功返回staff_number
 	 * @throws JWTVerificationException
@@ -53,7 +53,6 @@ public class JwtServiceImpl implements JwtService {
 			DecodedJWT jwt = verifier.verify(token);
 			Map<String, Claim> claim = jwt.getClaims();
 			staff_number = claim.get("staff_number").asString();
-
 		} catch (JWTVerificationException exception) {
 			// Invalid signature/claims
 		}
