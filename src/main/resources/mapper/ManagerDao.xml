@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.ManagerDao">
+
+	<!-- 添加设备 -->
+	<insert id="addDevice">
+		insert into device (name,type) values
+		(#{name},#{type})
+	</insert>
+
+	<!-- 查看设备 -->
+	<select id="queryDeviceByName" resultType="device"
+		parameterType="String">
+		select device_id,name,type
+		from device
+		where name=#{name}
+	</select>
+
+
+	<!-- 修改设备 -->
+	<update id="modifyDevice">
+		update device
+		set name=#{name},type=#{type}
+		where
+		device_id=#{deviceId}
+	</update>
+
+	<!-- 删除设备 -->
+	<delete id="deleteFromDevice">
+		delete from device
+		where device_id=#{deviceId}
+	</delete>
+
+	<!-- 删除员工 -->
+	<delete id="deleteFromStaff">
+		delete from staff
+		where staff_number=#{staffNumber}
+	</delete>
+
+	<!-- 查看员工 -->
+	<select id="queryStaffByStaffNumber" resultType="staff"
+		parameterType="String">
+		select staff_number,name,department,position,phone
+		from
+		staff
+		where staff_number=#{staffNumber}
+	</select>
+
+	<!-- 查看当前预约记录 -->
+	<select id="queryBookingByRoomNumber" resultType="dtoout.MyBooked"
+		parameterType="String">
+		select
+		name,staff_number,room_number,start_date,end_date,start_time,end_time
+		from booked natural join time_booked natural join staff
+		where
+		room_number=#{roomNumber}
+	</select>
+
+	<!-- 查看历史预约记录 -->
+	<select id="queryBookedByRoomNumber" resultType="dtoout.MyBooked"
+		parameterType="String">
+		select
+		name,staff_number,room_number,start_date,end_date,start_time,end_time
+		from booked natural join time_booked natural join staff
+		where
+		room_number=#{roomNumber}
+	</select>
+
+	<!-- 新增会议室 -->
+	<insert id="addMeetingRoom">
+		insert into meetingroom room_number,capability values
+		(#{roomNumber},#{capability})
+	</insert>
+
+	<!-- 修改可容纳人数 -->
+	<update id="modifyCapablity">
+		update meetingroom
+		set capablity=#{capablity}
+		where
+		room_number=#{roomNumber}
+	</update>
+
+	<!-- 修改时间 -->
+	<update id="modifyTimeAvailable">
+		update time_available
+		set
+		start_date=#{startDate},end_date=#{endDate},start_time=#{startTime},end_time=#{endTime}
+		where room_number=#{roomNumber}
+	</update>
+
+	<!-- 修改设备 -->
+	<update id="modifyRoomDevice">
+		update room_device
+		set count=#{count}
+		where
+		room_number=#{roomNumber} and dcevice_id=#{deviceId}
+	</update>
+
+	<!-- 查看会议室信息 -->
+	<select id="queryRoomByRoomNumber" resultType="dtoout.MyRoom"
+		parameterType="String">
+		select
+		room_number,capablity,start_date,end_date,start_time,end_time,device.name,count
+		from meetingroom natural join time_available natural join room_devices
+		natural join device
+		where room_number=#{roomNumber}
+	</select>
+
+
+</mapper>
