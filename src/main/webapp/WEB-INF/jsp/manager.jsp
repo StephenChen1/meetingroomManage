@@ -153,7 +153,7 @@
 							   <tbody class="tablebody" id = "addRoomBody">
 							      <tr>
 							         <td>1</td>
-							         <td>10001</td>
+							         <td class = "roomNumber">10001</td>
 							         <td>100</td>
 							         <td>
 							         	 2018-07-21~2018-08-25 09:30~16:00<br>
@@ -166,8 +166,8 @@
 							         </td>
 							         <td>
 							         	<div>
-                                			<button class="btn btn-success btn-xs" data-toggle="modal" data-target="#setFreeTimePop">设置时间</button>
-                                			<button class="btn btn-danger btn-xs"  data-toggle="modal" data-target="#setServicePop">设置设备</button>
+                                			<button class="btn btn-success btn-xs setTimeBtn" data-toggle="modal" data-target="#setFreeTimePop">设置时间</button>
+                                			<button class="btn btn-danger btn-xs setDeviceBtn"  data-toggle="modal" data-target="#setServicePop">设置设备</button>
                             			</div>
 							         </td>
 							      </tr>
@@ -223,36 +223,42 @@
                                 		<h4 class="modal-title" id="gridSystemModalLabel">设置空闲时段</h4>
                             		</div>
                             		<div class="modal-body">
-                               		 	<div class="container-fluid">
-                                    		<form class="form-horizontal">
+                               		 	<div class="container-fluid" id = "freeBody">
+                                    		<form class="form-horizontal freeTime" id = "freePane1" onsubmit="return false;">
                                         		<div class="form-group ">
                                             		<label for="sName" class="col-xs-3 control-label">开始日期：</label>
                                             		<div class="col-xs-6 ">
-                                                		<input type="text" class="form-control input-sm duiqi" id="startDate1" placeholder="">
+                                                		<!-- <input type="text" class="form-control input-sm duiqi startDate" id="startDate1" placeholder=""> -->
+                                                		<input type="date" class="form-control input-sm duiqi startDate" value="2015-09-24" min="2018-09-16" max="2018-09-26"/>
                                             		</div>
                                         		</div>
                                         		<div class="form-group ">
                                             		<label for="sName" class="col-xs-3 control-label">结束日期：</label>
                                             		<div class="col-xs-6 ">
-                                                		<input type="text" class="form-control input-sm duiqi" id="endDate1" placeholder="">
+                                                		<!-- <input type="text" class="form-control input-sm duiqi endDate1" id="endDate1" placeholder=""> -->
+                                            			<!-- 日期选择组件 -->
+                                            			<input type="date" class="form-control input-sm duiqi endDate" value="2018-09-24" min="2018-09-16" />
                                             		</div>
                                         		</div>
                                         		<div class="form-group ">
                                             		<label for="sName" class="col-xs-3 control-label">开始时间：</label>
                                             		<div class="col-xs-6 ">
-                                                		<input type="text" class="form-control input-sm duiqi" id="startTime1" placeholder="">
+                                                		<!-- <input type="text" class="form-control input-sm duiqi startTime" id="startTime1" placeholder=""> -->
+                                            			<!-- 时间控件 -->                                           			
+														<input type="time" class="form-control input-sm duiqi startTime"  value="09:00"/>
                                             		</div>
                                         		</div>
                                         		<div class="form-group ">
                                             		<label for="sName" class="col-xs-3 control-label">结束时间：</label>
                                             		<div class="col-xs-6 ">
-                                                		<input type="text" class="form-control input-sm duiqi" id="endTime1" placeholder="">
+                                                		<input type="time" class="form-control input-sm duiqi endTime"  value="18:00"/>
+                                                		<!-- <input type="text" class="form-control input-sm duiqi endTime" id="endTime1" placeholder=""> -->
                                             		</div>
                                         		</div>
                                         		<div class="form-group ">
                                             		<div class="col-xs-6 ">
-                                						<button class="btn btn-success btn-xs" >+</button>
-                                						<button class="btn btn-danger btn-xs"  >-</button>
+                                						<button class="btn btn-success btn-xs addFreePane" >+</button>
+                                						<!-- <button class="btn btn-danger btn-xs " >-</button> -->
                             			    		</div>
                                         		</div>                
                                     		</form>
@@ -275,29 +281,31 @@
                         		<div class="modal-content">
                             		<div class="modal-header">
                                 		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                		<h4 class="modal-title" id="gridSystemModalLabel">修改权限</h4>
+                                		<h4 class="modal-title" id="gridSystemModalLabel">修改设备信息</h4>
                             		</div>
                             		<div class="modal-body">
-                                		<div class="container-fluid">
-                                    		<form class="form-horizontal">
+                                		<div class="container-fluid " id = "deviceBody">
+                                    		<form class="form-horizontal setDeviceForm" onsubmit="return false;">
                                         		<div class="form-group ">
                                             		<label for="sName" class="col-xs-3 control-label">设备：</label>
                                             		<div class="col-xs-6 ">
-                                               		<select  class="form-control input-sm duiqi" id="deviceSelect" >
-																	
+                                               		<select  class="form-control input-sm duiqi deviceSelect"  >
+														<option value = "10003">椅子(10003)</option>
+														<option value = "10003">椅子(10003)</option>
+																
 											   		</select>
                                             		</div>
                                         		</div>
                                         		<div class="form-group">
                                             		<label for="sLink" class="col-xs-3 control-label">数量：</label>
                                             		<div class="col-xs-6 ">
-                                                		<input type = "text" class="form-control input-sm duiqi"></input>
+                                                		<input type = "text" class="form-control input-sm duiqi deviceNumInput"></input>
                                             		</div>
                                         		</div>
                                         		<div class="form-group ">
                                             		<div class="col-xs-6 ">
-                                						<button class="btn btn-success btn-xs" >+</button>
-                                						<button class="btn btn-danger btn-xs"  >-</button>
+                                						<button class="btn btn-success btn-xs addDevicePane" >+</button>
+                                						<!-- <button class="btn btn-danger btn-xs"  >-</button> -->
                             			    		</div>
                                         		</div>       
                                     		</form>
@@ -967,7 +975,7 @@
                
                
                			<!-- 删除设备提示弹出窗口 -->
-                		<div class="modal fade" id="deleteUser" role="dialog" aria-labelledby="gridSystemModalLabel">
+                		<div class="modal fade" id="deleteDevicePop" role="dialog" aria-labelledby="gridSystemModalLabel">
                     		<div class="modal-dialog" role="document">
                         		<div class="modal-content">
                             		<div class="modal-header">
@@ -1187,7 +1195,7 @@
  		</div>
 
 		<!-- <script src="js/jquery.nouislider.js"></script> -->
-
+		<script src="${basePath}resources/js/manager.addroom.js"></script>
 	</body>
 
 </html>
