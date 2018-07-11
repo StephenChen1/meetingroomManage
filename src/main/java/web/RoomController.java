@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import dtoin.FreeTime;
+import dtoin.ModifyDevice;
 import dtoin.SetFreeTime;
+import entity.RoomDevice;
 import service.ManagerService;
 
 @RequestMapping(value = "/room", method = RequestMethod.POST)
@@ -52,5 +54,19 @@ public class RoomController {
 		String roomNumber = setFreeTime.getRoomNumber();
 		List<FreeTime> freeTimeList = setFreeTime.getFreeTime();
 		return managerService.setFreeTime(roomNumber, freeTimeList);
+	}
+
+	/**
+	 * 修改会议室设备
+	 * 
+	 * @param modifyDevice
+	 * @return
+	 */
+	@RequestMapping("/modifyDevice")
+	@ResponseBody
+	public boolean modifyDevice(@RequestBody ModifyDevice modifyDevice) {
+		String roomNumber = modifyDevice.getRoomNumber();
+		List<RoomDevice> roomDeviceList = modifyDevice.getRoomDevice();
+		return managerService.modifyDevice(roomNumber, roomDeviceList);
 	}
 }

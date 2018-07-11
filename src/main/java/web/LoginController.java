@@ -70,6 +70,7 @@ public class LoginController {
 		map.put("staffName", staff.getName());
 		map.put("level", staff.getLevel());
 		map.put("department", staff.getDepartment());
+		map.put("position", staff.getPosition());
 		map.put("birthday", staff.getBirthday());
 		map.put("phone", staff.getPhone());
 		map.put("address", staff.getAddress());

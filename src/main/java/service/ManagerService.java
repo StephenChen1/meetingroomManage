@@ -3,6 +3,7 @@ package service;
 import java.util.List;
 
 import dtoin.FreeTime;
+import entity.RoomDevice;
 
 public interface ManagerService {
 	
@@ -22,4 +23,11 @@ public interface ManagerService {
 	 */
 	public boolean setFreeTime(String roomNumber,List<FreeTime> freeTimeList);
 
+	/**
+	 * 修改会议室设备
+	 * @param roomNumber
+	 * @param roomDeviceList
+	 * @return
+	 */
+	public boolean modifyDevice(String roomNumber,List<RoomDevice> roomDeviceList);
 }

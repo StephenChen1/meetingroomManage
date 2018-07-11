@@ -44,7 +44,7 @@ public interface ManagerDao {
 	boolean modifyTimeAvailable(@Param("roomNumber") String roomNumber, @Param("startDate") String startDate,
 			@Param("endDate") String endDate, @Param("startTime") String startTime, @Param("endTime") String endTime);
 
-	// 删除已有会议室空闲时间
+	// 删除已有会议室所有空闲时间
 	boolean deleteFreeTime(@Param("roomNumber") String roomNumber);
 
 	// 增加会议室空闲时间（与删除配合使用，先删除后增加）
