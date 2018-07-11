@@ -5,6 +5,7 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources/META-INF/maven/cn.learn.zjxpp/meetingroomManage"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
         <property name="context-root" value="meetingroomManage"/>
         <property name="java-output-path" value="/meetingroomManage/target/classes"/>
     </wb-module>

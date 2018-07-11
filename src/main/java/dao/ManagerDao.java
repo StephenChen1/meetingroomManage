@@ -1,9 +1,12 @@
 package dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import dtoout.MyBooked;
 import dtoout.MyRoom;
+import dtoout.AllRoom;
 import entity.Device;
 import entity.Staff;
 
@@ -51,4 +54,17 @@ public interface ManagerDao {
 
 	// 查看会议室信息
 	MyRoom queryRoomByRoomNumber(@Param("roomNumber") String roomNumber);
+
+	/**获取所有会议室信息
+	 * @param 无
+	 * @return 返回所有会议室的信息
+	 */
+	List<AllRoom> getAllRooms();
+
+	/**
+	 * 根据id查询会议室获取该会议室信息
+	 * @param roomNumber
+	 * @return 该会议室信息数据
+	 */
+	AllRoom searchRoomById(String roomNumber);
 }
