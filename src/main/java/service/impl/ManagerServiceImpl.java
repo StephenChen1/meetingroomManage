@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import dao.ManagerDao;
 import dao.RoomDeviceDao;
 import dtoin.FreeTime;
+import dtoout.AllRoom;
 import entity.RoomDevice;
 import service.ManagerService;
 
@@ -53,6 +54,29 @@ public class ManagerServiceImpl implements ManagerService {
 			flag = flag & temp;
 		}
 		return flag;
+	}
+
+	/**
+	 * 获取所有会议室信息
+	 * 
+	 * @param 无
+	 * @return 返回所有会议室的信息
+	 */
+	@Override
+	public List<AllRoom> getAllRooms() {
+		return managerDao.getAllRooms();
+	}
+
+	/**
+	 * 根据id查询会议室获取该会议室信息
+	 * 
+	 * @param roomNumber
+	 * @return 该会议室信息数据
+	 */
+	@Override
+	public AllRoom searchRoomById(String roomNumber) {
+		// TODO 自动生成的方法存根
+		return managerDao.searchRoomById(roomNumber);
 	}
 
 }

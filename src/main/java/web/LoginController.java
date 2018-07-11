@@ -1,6 +1,7 @@
 package web;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
@@ -10,10 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import dtoout.AllRoom;
 import entity.Staff;
 import service.JwtService;
 import service.LoginService;
@@ -49,6 +52,8 @@ public class LoginController {
 	public Map<String, Object> validateLogin(HttpServletRequest request, HttpServletResponse response) {
 		String staffNumber = request.getParameter("staffNumber");
 		String password = request.getParameter("password");
+		System.out.println(staffNumber);
+		System.out.println(password);
 		// 前端注意要有参数，不然会报500
 		// 理论上后台也要再确认一次，然后返回对应的错误码（但目前懒得弄）
 		if ((staffNumber == null) || (password == null)) {
@@ -163,4 +168,5 @@ public class LoginController {
 		String staffNumber = jwtService.getStaffNum(token);
 		return staffNumber;
 	}
+	
 }
