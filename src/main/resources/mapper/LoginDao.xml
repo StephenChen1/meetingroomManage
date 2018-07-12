@@ -13,6 +13,12 @@
 		staff_number = #{staffNumber}
 	</select>
 
+	<!-- 修改密码 -->
+	<update id="modifyPassword">
+		update login 
+		set password=#{newPass} 
+		where staff_number=#{staffNumber} and password=#{oldPass}
+	</update>
 
 </mapper>
   

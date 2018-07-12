@@ -168,4 +168,25 @@ public class LoginController {
 		return staffNumber;
 	}
 	
+	
+	/**
+	 * 修改密码
+	 * @param 员工编号staffNumber
+	 * @param 原密码oldPass
+	 * @param 新密码newPass
+	 * @return boolean
+	 */
+	@RequestMapping(value = "/modifyPassword", method = RequestMethod.POST)
+	@ResponseBody
+	public boolean modifyPassword(@RequestBody(required=false) Map<String,Object> map) {
+		String staffNumber = map.get("staffNumber").toString();
+		String oldPass = map.get("oldPass").toString();
+		String newPass = map.get("newPass").toString();
+		System.out.println("已进入modifyPassword方法");
+		System.out.println(staffNumber+"   "+oldPass+"   "+newPass);
+		boolean isOK = loginService.modifyPassword(staffNumber,oldPass,newPass);
+		//System.out.println("ISOK：" + isOK);
+		return isOK;
+	}
+	
 }

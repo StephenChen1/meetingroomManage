@@ -21,23 +21,28 @@
             $(function() {
             	//此代码用于测试根据会议室号查询会议室信息,测试完成后user.jsp的id为test的button要去掉这的"test"Id
             	 /* $("#test").click(function(){
-            		    alert("点击了test按钮");
-            		    var roomNumber = "1111";
-            		    alert("roomNumber:" + roomNumber);
+            		    alert("test按钮");
+            		    var staffNumber = "201525010507";
+            		    var oldPass = "1111";
+            		    var newPass = "201525010507";
+            		    alert("staffNumber:" + staffNumber);
+            		    alert("oldPass:" + oldPass);
+            		    alert("newPass:" + newPass);
             		    var data = {
-            		    		roomNumber:roomNumber
+            		    		staffNumber:staffNumber,
+            		    		oldPass:oldPass,
+            		    		newPass:newPass
             		    }
-            		    alert("roomNumber:" + roomNumber);
             		    $.ajax({
             		    	type : "post",
-            		    	url:"../room/deleteById",
+            		    	url:"modifyPassword",
             		    	contentType:"application/json",
             		        data:JSON.stringify(data),
             		        success:function(result){
             		        	alert("success");
             		        }
             		    });
-            		  }); */
+            		  });  */
             	
             	
                 $(".meun-item").click(function() {
