@@ -30,4 +30,11 @@
 		staff_number=#{id}
 	</update>
 
+	<!-- 修改个人信息 -->
+	<update id="modifyInfo">
+		update staff
+		set staff_number=#{newStaffNumber},name=#{newName},department=#{newDepartment},position=#{newPosition},birthday=#{newBirthday},phone=#{newPhone},address=#{newAddress}
+		where staff_number=#{staffNumber}
+	</update>
+	
 </mapper>

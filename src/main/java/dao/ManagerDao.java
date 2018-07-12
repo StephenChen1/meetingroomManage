@@ -42,7 +42,7 @@ public interface ManagerDao {
 	boolean addMeetingRoom(@Param("roomNumber") String roomNumber, @Param("capability") int capability);
 
 	// 修改会议室可容纳人数
-	boolean modifyCapablity(@Param("roomNumber") String roomNumber, @Param("capablity") int capablity);
+	boolean modifyCapability(@Param("roomNumber") String roomNumber, @Param("capability") int capability);
 
 	// 修改会议室时间
 	boolean modifyTimeAvailable(@Param("roomNumber") String roomNumber, @Param("startDate") String startDate,

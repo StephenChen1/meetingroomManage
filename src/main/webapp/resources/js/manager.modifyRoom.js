@@ -185,11 +185,12 @@ $(document).ready(function(){
 		$.ajax({
 	    	type : "post",
 	    	url:"../room/modifyCapability",
-	    	//contentType:"application/json",
-	        //data:JSON.stringify(data),
-	    	data:data,
+	    	contentType:"application/json",
+	        data:JSON.stringify(data),
+	    	//data:data,
 	        success:function(result){
 	        	//TODO返回布尔值
+	        	alert("修改成功");
 	        }
 		});
 	});

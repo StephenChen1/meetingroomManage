@@ -33,6 +33,7 @@ public class LoginServiceImpl implements LoginService {
 			return true;
 		}
 	}
+
 	
 	
 	/**
@@ -65,4 +66,18 @@ public class LoginServiceImpl implements LoginService {
 	
 	
 	
+
+
+	/**
+	 * 修改密码
+	 * @param 员工编号staffNumber
+	 * @param 原密码oldPass
+	 * @param 新密码newPass
+	 * @return boolean
+	 */
+	@Override
+	public boolean modifyPassword(String staffNumber, String oldPass,String newPass) {
+		return loginDao.modifyPassword(staffNumber,oldPass,newPass);
+	}
+
 }

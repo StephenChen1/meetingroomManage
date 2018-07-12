@@ -20,24 +20,24 @@
         <script>
             $(function() {
             	//此代码用于测试根据会议室号查询会议室信息,测试完成后user.jsp的id为test的button要去掉这的"test"Id
-            	 /* $("#test").click(function(){
-            		    alert("点击了test按钮");
-            		    var roomNumber = "1111";
-            		    alert("roomNumber:" + roomNumber);
+            	 	  /* $("#test").click(function(){
+            		    alert("test按钮");
+            		    var roomNumber = "90";
+            		    var newCapability = "90";
             		    var data = {
-            		    		roomNumber:roomNumber
+            		    		roomNumber:roomNumber,
+            		    		newCapability:newCapability
             		    }
-            		    alert("roomNumber:" + roomNumber);
             		    $.ajax({
             		    	type : "post",
-            		    	url:"../room/deleteById",
+            		    	url:"../room/modifyCapability",
             		    	contentType:"application/json",
             		        data:JSON.stringify(data),
             		        success:function(result){
             		        	alert("success");
             		        }
             		    });
-            		  }); */
+            		  });  */
             	
             	
                 $(".meun-item").click(function() {

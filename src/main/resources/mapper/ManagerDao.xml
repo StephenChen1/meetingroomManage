@@ -191,8 +191,8 @@
 		(#{roomNumber},#{capability})
 	</insert>
 
-	<!-- 修改可容纳人数 -->
-	<update id="modifyCapablity">
+	<!-- 修改会议室可容纳人数 -->
+	<update id="modifyCapability">
 		update meetingroom
 		set capability=#{capability}
 		where

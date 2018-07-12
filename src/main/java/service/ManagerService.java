@@ -72,4 +72,13 @@ public interface ManagerService {
 	 */
 	public List<AllBooked> getPersonalBooked(String staffNumber);
 
+
+	/**
+	 * 修改会议室容量
+	 * @param 会议室编号roomNumber
+	 * @param 新容量newCapability
+	 * @return boolean
+	 */
+	public boolean modifyCapability(String roomNumber, int newCapability);
+
 }
