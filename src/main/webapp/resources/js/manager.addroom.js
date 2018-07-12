@@ -27,8 +27,9 @@ $(document).ready(function(){
 	        success:function(result){
 	        	//TODO
 	        	for(var i = 0 ; i < result.length ; i ++){
-    	    		  var text = result[i];
-    	    		  $("#yearOptionsEnter").append("<option value='"+text+"'>"+text+"</option>"); 
+	        		  //得到设备名(id)
+    	    		  var text = result[i].name+"("+result[i].deviceId+")";
+    	    		  $("#setDevicePop").append("<option value='"+result[i].deviceId+"'>"+text+"</option>"); 
     	    	  }
 	        }
 	    });		
@@ -212,7 +213,7 @@ $(document).ready(function(){
 		    alert($(this).find(".deviceSelect").val());
 		    alert($(this).find(".deviceNumInput").val());
 		    var deviceObject = new Object();
-		    deviceObject.name = $(this).find(".deviceSelect").val();
+		    deviceObject.id = $(this).find(".deviceSelect").val();
 		    deviceObject.count = $(this).find(".deviceNumInput").val();
 		    devicesArray.push(deviceObject);
 		  });
