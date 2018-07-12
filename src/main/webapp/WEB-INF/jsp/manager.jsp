@@ -151,7 +151,7 @@
 								 </tr>
 							   </thead>
 							   <tbody class="tablebody" id = "addRoomBody">
-							      <tr>
+							      <!-- <tr>
 							         <td>1</td>
 							         <td class = "roomNumber">10001</td>
 							         <td>100</td>
@@ -170,7 +170,7 @@
                                 			<button class="btn btn-danger btn-xs setDeviceBtn"  data-toggle="modal" data-target="#setServicePop">设置设备</button>
                             			</div>
 							         </td>
-							      </tr>
+							      </tr> -->
 							   </tbody>
 							</table>
                 		</div>
@@ -229,7 +229,7 @@
                                             		<label for="sName" class="col-xs-3 control-label">开始日期：</label>
                                             		<div class="col-xs-6 ">
                                                 		<!-- <input type="text" class="form-control input-sm duiqi startDate" id="startDate1" placeholder=""> -->
-                                                		<input type="date" class="form-control input-sm duiqi startDate" value="2015-09-24" min="2018-09-16" max="2018-09-26"/>
+                                                		<input type="date" class="form-control input-sm duiqi startDate" value="2018-07-10" min="2018-07-9" />
                                             		</div>
                                         		</div>
                                         		<div class="form-group ">
@@ -237,7 +237,7 @@
                                             		<div class="col-xs-6 ">
                                                 		<!-- <input type="text" class="form-control input-sm duiqi endDate1" id="endDate1" placeholder=""> -->
                                             			<!-- 日期选择组件 -->
-                                            			<input type="date" class="form-control input-sm duiqi endDate" value="2018-09-24" min="2018-09-16" />
+                                            			<input type="date" class="form-control input-sm duiqi endDate" value="2020-09-24" min="2018-07-10" />
                                             		</div>
                                         		</div>
                                         		<div class="form-group ">
@@ -290,8 +290,8 @@
                                             		<label for="sName" class="col-xs-3 control-label">设备：</label>
                                             		<div class="col-xs-6 ">
                                                		<select  class="form-control input-sm duiqi deviceSelect"  >
-														<option value = "10003">椅子(10003)</option>
-														<option value = "10003">椅子(10003)</option>
+														<!-- <option value = "10003">椅子(10003)</option>
+														<option value = "10003">椅子(10003)</option> -->
 																
 											   		</select>
                                             		</div>
@@ -1230,8 +1230,10 @@
  		</div>
 
 		<!-- <script src="js/jquery.nouislider.js"></script> -->
-		<!-- <script src="${basePath}resources/js/manager.addroom.js"></script>-->
+		 <script src="${basePath}resources/js/manager.addroom.js"></script>
 		<!--<script src="${basePath}resources/js/manager.modifyRoom.js"></script> -->
+		<script src="${basePath}resources/js/exitLogin.js"></script>
+		<script src="${basePath}resources/js/manager.commom.js"></script>
 	</body>
 
 </html>

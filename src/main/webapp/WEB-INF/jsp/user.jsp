@@ -95,8 +95,8 @@
                 </div>
                 <div id="personInfor">
 					<p>欢迎您！</p>
-                    <p id="userName">stephen</p>
-					<p id = "userId">10001</p>
+                    <p id="userName"></p>
+					<p id = "userId"></p>
                     <p>
                         <!-- 退出登录按钮 -->
 						<button type="button" class="btn btn-default btn-sm" id = "exitLogin">退出登录</button>
@@ -579,6 +579,8 @@
  		</div>
 
 		<script src="${basePath}resources/js/jquery.nouislider.js"></script>
+		<script src="${basePath}resources/js/exitLogin.js"></script>
+		<script src="${basePath}resources/js/user.commom.js"></script>
 	</body>
 
 </html>

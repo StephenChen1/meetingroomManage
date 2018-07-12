@@ -26,7 +26,7 @@
 			<div class="top-login">
 				<span><img src="${basePath}resources/images/group.png" alt=""/></span>
 			</div>
-			<h1>成绩管理系统登录</h1>
+			<h1>会议室预约系统登录</h1>
 			<div class="login-top">
 			<div>
 				<div class="login-ic">
@@ -40,7 +40,7 @@
 					<div class="clear"> </div>
 					<div align = "center"id = "loginTip"> </div>
 				</div>
-				 <div class="login-ic">
+				 <!-- <div class="login-ic">
 				 <table>
 				    <tr>
 					<th class="col-xs-6">
@@ -55,7 +55,7 @@
 					</th>
 					</tr>
 					</table>
-				</div> 
+				</div>  -->
 				
 				
 			

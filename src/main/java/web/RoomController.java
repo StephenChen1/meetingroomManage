@@ -58,6 +58,7 @@ public class RoomController {
 	@ResponseBody
 	public boolean setFreeTime(@RequestBody SetFreeTime setFreeTime) {
 		String roomNumber = setFreeTime.getRoomNumber();
+		System.out.println("addRoomNumber:" + roomNumber);
 		List<FreeTime> freeTimeList = setFreeTime.getFreeTime();
 		return managerService.setFreeTime(roomNumber, freeTimeList);
 	}
@@ -74,7 +75,7 @@ public class RoomController {
 		String roomNumber = modifyDevice.getRoomNumber();
 		List<RoomDevice> roomDeviceList = modifyDevice.getRoomDevice();
 		return managerService.modifyDevice(roomNumber, roomDeviceList);
-	}
+	}        
 	
 	/**
 	 * 获取所有会议室信息

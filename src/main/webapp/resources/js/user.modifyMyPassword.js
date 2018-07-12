@@ -26,10 +26,10 @@ $(document).ready(function(){
 				newPass:newPass
 			}
 			
-			//传给后台修改
+			//传给后台修改用户密码
 			$.ajax({
 		    	type : "post",
-		    	url:"../booked/getByStaffNumber",
+		    	url:"../login/modifyPassword",
 		    	//contentType:"application/json",
 		        //data:JSON.stringify(data),
 		    	data:data,

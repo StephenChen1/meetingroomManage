@@ -9,4 +9,12 @@ public interface LoginService {
 	 * @return 登陆成功返回true，失败返回false
 	 */
 	public boolean login(String staffNumber,String password);
+	
+	
+	/**
+	 * 查询是用户还是管理员
+	 * @param staffNumber
+	 * @return
+	 */
+	String managerOrUser(String staffNumber);
 }

@@ -77,7 +77,7 @@ $(document).ready(function(){
     	//传到后台，修改个人信息
     	$.ajax({
 	    	type : "post",
-	    	url:"../booked/getByStaffNumber",
+	    	url:"../staff/modifyInfo",
 	    	//contentType:"application/json",
 	        //data:JSON.stringify(data),
 	    	data:data,

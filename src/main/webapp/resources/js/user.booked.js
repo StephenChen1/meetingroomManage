@@ -168,7 +168,7 @@ $(document).ready(function(){
 					endTime:endTime
 			}
 			
-			//发送该预约记录给后台
+			//发送该预约记录给后台,预约
 			$.ajax({
 		    	type : "post",
 		    	url:"../booked/commitOne",
