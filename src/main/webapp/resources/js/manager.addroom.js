@@ -1,9 +1,51 @@
 //管理员界面的添加会议室模块
 
+//自定义函数，得到所有设备
+(function ($) {
+	 //往下拉框添加选项，参数：下拉框，设备数组
+	$.showDevices = function(selector , devices){
+		//先移除所有选项
+		selector.find("option").remove();
+		//alert("展示所有设备");
+		for(var i = 0 ; i < devices.length ; i ++){
+			//得到设备名(id)
+			var text = devices[i].name+"("+devices[i].deviceId+")";
+			selector.append("<option value='"+devices[i].deviceId+"'>"+text+"</option>"); 
+			
+		}
+	}
+	
+	
+})(jQuery)
+
+
+
+
 $(document).ready(function(){
 
 	//定义全局变量，会议室号，根据按钮点击事件改变
 	var roomNumber ;
+	//定义全局变量；保存所有设备信息，方便设置设备信息的下拉框
+	var allDevices ;
+	
+	//左上角添加会议室按钮点击事件，弹出框的同时得到所有设备保存于全局变量
+	$("#addRoomBtn").click(function(){
+		//allDevices = $.getAllDevices();
+		/*alert("点击了");
+		$.ajax({
+	    	type : "post",
+	    	url:"../device/getAll",
+	    	//contentType:"application/json",
+	        //data:JSON.stringify(data),
+	    	//data:data,
+	        success:function(result){
+	        	alert("得到了数据");
+	        	allDevices = result ;
+	        	
+	        }
+		});*/
+		
+	});
 	
 	
 	//设置空闲时间按钮点击事件,更改当前操作的会议室号
@@ -15,24 +57,11 @@ $(document).ready(function(){
 	//设置设备信息按钮点击事件，更改当前操作的会议室号,更新设备下拉框
 	$(document).on('click','.setDeviceBtn',function(){
 		roomNumber = $(this).parents("tr").find(".roomNumber").text();
-		//alert("roomNumber:" + roomNumber);
-		//更新设备下拉框
-		//从后台得到所有设备的信息,将设备名（设备id）选项添加到select
-		$.ajax({
-	    	type : "post",
-	    	url:"../device/getAll",
-	    	//contentType:"application/json",
-	        //data:JSON.stringify(data),
-	    	//data:data,
-	        success:function(result){
-	        	//TODO
-	        	for(var i = 0 ; i < result.length ; i ++){
-	        		  //得到设备名(id)
-    	    		  var text = result[i].name+"("+result[i].deviceId+")";
-    	    		  $("#setDevicePop").append("<option value='"+result[i].deviceId+"'>"+text+"</option>"); 
-    	    	  }
-	        }
-	    });		
+		
+		//调用自定义函数更新下拉框
+		var selector = $("#deviceSelect12");
+		$.showDevices(selector,allDevices);
+		
 	});
 	
 	
@@ -87,6 +116,18 @@ $(document).ready(function(){
 	        		$("#addRoomBody").append(addRoomRow);
 	        		//设置会议室设备信息弹出框的设备下拉框填上数据
 	        		//从后台得到所有设备信息
+	        		$.ajax({
+	        	    	type : "post",
+	        	    	url:"../device/getAll",
+	        	    	//contentType:"application/json",
+	        	        //data:JSON.stringify(data),
+	        	    	//data:data,
+	        	        success:function(result){
+	        	        	//alert("得到了数据");
+	        	        	allDevices = result ;
+	        	        	//alert(allDevices.length);
+	        	        }
+	        		});
 	        		
  	        	}else{
 	        		alert("添加失败");
@@ -110,7 +151,7 @@ $(document).ready(function(){
 	//新增表单
 	//设置空闲时间弹出框  + 按钮点击事件
 	$(document).on('click','.addFreePane',function(){
-		alert("+键被点击了");
+		//alert("+键被点击了");
 		//新表单的样式，字符串使用单双引号均可，主要看里面的是用什么，反着来就行，不用转义
 		var form = '<form class="form-horizontal freeTime"  onsubmit="return false;">' +
 		'<div class="form-group "> '+
@@ -230,12 +271,16 @@ $(document).ready(function(){
 		//增加表单
 		$("#deviceBody").append(deviceForm);
 		//表单的设备下拉框填上从后台获取的所有设备
-		var value = 10001 ;
+		/*var value = 10001 ;
 		var option1 = "<option value='"+value+"'>"+"桌子("+value+")</option>";
-		var option2 = "<option value='"+value+"'>"+"桌子("+value+")</option>";
+		var option2 = "<option value='"+value+"'>"+"桌子("+value+")</option>";*/
 		//当前点击元素的form父级的下一个元素（也是form）的select元素,现在是模拟数据，接下来会填充真实的所有设备
-		$(this).parents("form").next().find("select").append(option1);
-		$(this).parents("form").next().find("select").append(option2);
+		/*$(this).parents("form").next().find("select").append(option1);
+		$(this).parents("form").next().find("select").append(option2);*/
+		//得到新增加的表单的设备下拉框
+		var selector = $(this).parents("form").next().find("select") ;
+		//调用自定义函数展示所有选项
+		$.showDevices(selector,allDevices);
 		
 	});
 	
@@ -255,14 +300,17 @@ $(document).ready(function(){
 		//遍历各个form
 		$(".setDeviceForm").each(function(){
 			//得到下拉框值和输入的数量
-		    //alert($(this).find(".deviceSelect").val());
+		    alert($(this).find(".deviceSelect").val());
 		    //alert($(this).find(".deviceNumInput").val());
 		    var deviceObject = new Object();
-		    deviceObject.deviceId = $(this).find(".deviceSelect").val();
+		    deviceObject.deviceId = $(this).find(".deviceSelect option:selected").val();
 		    deviceObject.count = $(this).find(".deviceNumInput").val();
 		    devicesArray.push(deviceObject);
-		    deviceText = deviceText + deviceObject.id + 
-		    						" * " + deviceObject.count;
+		    
+		    //设备名
+		    var deviceName = $(this).find(".deviceSelect option:selected").text();
+		    deviceText = deviceText + deviceName + 
+		    						" * " + deviceObject.count +"<br>";
 		  });
 		
 		//封装上传数据

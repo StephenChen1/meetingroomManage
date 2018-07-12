@@ -133,7 +133,7 @@
                     <div role="tabpanel" class="tab-pane" id="addRoomPane">
 
                         <div class="check-div">
-                            <button class="btn btn-yellow btn-xs" data-toggle="modal" data-target="#addRoomPop">添加会议室</button>
+                            <button id = "addRoomBtn" class="btn btn-yellow btn-xs" data-toggle="modal" data-target="#addRoomPop">添加会议室</button>
                         </div>
                         <div class="data-div">
                             
@@ -281,7 +281,7 @@
                         		<div class="modal-content">
                             		<div class="modal-header">
                                 		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                		<h4 class="modal-title" id="gridSystemModalLabel">修改设备信息</h4>
+                                		<h4 class="modal-title" id="gridSystemModalLabel">设置设备信息</h4>
                             		</div>
                             		<div class="modal-body">
                                 		<div class="container-fluid " id = "deviceBody">
@@ -289,7 +289,7 @@
                                         		<div class="form-group ">
                                             		<label for="sName" class="col-xs-3 control-label">设备：</label>
                                             		<div class="col-xs-6 ">
-                                               		<select  class="form-control input-sm duiqi deviceSelect"  >
+                                               		<select  class="form-control input-sm duiqi deviceSelect" id = "deviceSelect12" >
 														<!-- <option value = "10003">椅子(10003)</option>
 														<option value = "10003">椅子(10003)</option> -->
 																
@@ -360,7 +360,7 @@
 								 </tr>
 							   </thead>
 							   <tbody class="tablebody" id = "modifyRoomBody">
-							      <tr>
+							      <!-- <tr>
 							         <td class="index">1</td>
 							         <td class="roomNumber">10001</td>
 							         <td >100</td>
@@ -381,7 +381,7 @@
                                 			<button class="btn btn-danger btn-xs deleteRoom"  data-toggle="modal" data-target="#mdeleteRoomPop">删除</button>
                             			</div>
 							         </td>
-							      </tr>
+							      </tr> -->
 							   </tbody>
 							</table>
                     	
@@ -434,8 +434,8 @@
                                 		<h4 class="modal-title" id="gridSystemModalLabel">修改空闲时段</h4>
                             		</div>
                             		<div class="modal-body">
-                                		<div class="container-fluid modifyFreeBody">
-                                    		<form class="form-horizontal">
+                                		<div class="container-fluid" id = "modifyFreeBody">
+                                    		 <!-- <form class="form-horizontal " onsubmit="return false;">
                                         		<div class="form-group ">
                                             		<label for="sName" class="col-xs-3 control-label">开始日期：</label>
                                             		<div class="col-xs-6 ">
@@ -463,10 +463,10 @@
                                         		<div class="form-group ">
                                             		<div class="col-xs-6 ">
                                 						<button class="btn btn-success btn-xs modifyAddFreeForm" >+</button>
-                                						<button class="btn btn-danger btn-xs"  >-</button>
+                                						<button class="btn btn-danger btn-xs modifyDeleteFreeForm"  >-</button>
                             			    		</div>
                                         		</div>
-                                    		</form>
+                                    		</form>  -->
                                 		</div>
                             		</div>
                             		<div class="modal-footer">
@@ -490,7 +490,7 @@
                             		</div>
                             		<div class="modal-body">
                                 		<div class="container-fluid " id = "modifyDeviceBody">
-                                    		<form class="form-horizontal modifyDeviceForm">
+                                    		<form class="form-horizontal modifyDeviceForm" onsubmit="return false;">
                                         		<div class="form-group ">
                                            	 		<label for="deviceModifySelect" class="col-xs-3 control-label">设备：</label>
                                             		<div class="col-xs-6 ">
@@ -507,8 +507,8 @@
                                         		</div>
                                         		<div class="form-group ">
                                             		<div class="col-xs-6 ">
-                                						<button class="btn btn-success btn-xs" >+</button>
-                                						<button class="btn btn-danger btn-xs"  >-</button>
+                                						<button class="btn btn-success btn-xs modifyAddDeviceForm" >+</button>
+                                						<button class="btn btn-danger btn-xs modifyDeleteDeviceForm"  >-</button>
                             			    		</div>
                                         		</div>
                                         
@@ -1230,8 +1230,8 @@
  		</div>
 
 		<!-- <script src="js/jquery.nouislider.js"></script> -->
-		 <script src="${basePath}resources/js/manager.addroom.js"></script>
-		<!--<script src="${basePath}resources/js/manager.modifyRoom.js"></script> -->
+		 <script src="${basePath}resources/js/manager.addroom.js"></script> 
+		<script src="${basePath}resources/js/manager.modifyRoom.js"></script>
 		<script src="${basePath}resources/js/exitLogin.js"></script>
 		<script src="${basePath}resources/js/manager.commom.js"></script>
 	</body>

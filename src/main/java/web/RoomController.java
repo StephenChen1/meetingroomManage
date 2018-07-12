@@ -123,6 +123,7 @@ public class RoomController {
 	@ResponseBody
 	public boolean deleteRoomById(@RequestBody(required=false) Map<String,Object> map) {
 		String roomNumber = map.get("roomNumber").toString();
+		System.out.println(roomNumber);
 		boolean flag=managerService.deleteRoomById(roomNumber);
 		return flag;
 	}
