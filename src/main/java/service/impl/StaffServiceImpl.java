@@ -21,4 +21,14 @@ public class StaffServiceImpl implements StaffService{
 		return staff;
 	}
 
+	//修改个人信息
+	@Override
+	public boolean modifyInfo(String staffNumber,String newStaffNumber, String newName,
+			String newPhone, String newBirthday, String newAddress,
+			String newDepartment, String newPosition) {
+		// TODO 自动生成的方法存根
+		return staffDao.modifyInfo(staffNumber,newStaffNumber,newName,newPhone
+				,newBirthday,newAddress,newDepartment,newPosition);
+	}
+
 }

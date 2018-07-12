@@ -37,4 +37,9 @@ public interface StaffDao {
 	 */
 	boolean modifyStaff(@Param("id") String id, @Param("name") String name, @Param("birthday") String birthday,
 			@Param("phone") String phone);
+
+	//修改个人信息，区别修改员工资料
+	boolean modifyInfo(@Param("staffNumber")String staffNumber,@Param("newStaffNumber")String newStaffNumber, @Param("newName")String newName, @Param("newPhone")String newPhone,
+			@Param("newBirthday")String newBirthday, @Param("newAddress")String newAddress, @Param("newDepartment")String newDepartment,
+			@Param("newPosition")String newPosition);
 }
