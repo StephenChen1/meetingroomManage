@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import dao.ManagerDao;
 import dao.RoomDeviceDao;
 import dtoin.FreeTime;
+import dtoout.AllBooked;
 import dtoout.AllRoom;
 import entity.RoomDevice;
 import service.ManagerService;
@@ -75,8 +76,38 @@ public class ManagerServiceImpl implements ManagerService {
 	 */
 	@Override
 	public AllRoom searchRoomById(String roomNumber) {
-		// TODO 自动生成的方法存根
 		return managerDao.searchRoomById(roomNumber);
 	}
+	
 
+	/**
+	 * 根据roomNumber删除会议室
+	 * @param roomNumber
+	 * @return boolean
+	 */
+	@Override
+	public boolean deleteRoomById(String roomNumber) {
+		return managerDao.deleteRoomById(roomNumber);
+	}
+
+	
+	/**
+	 * 查看全部员工所有预约记录
+	 * @param 无
+	 * @return List<AllBooked>
+	 */
+	@Override
+	public List<AllBooked> getAllBooked() {
+		return managerDao.getAllBooked();
+	}
+
+	/**
+	 * 查看对应员工的所有预约记录
+	 * @param staffNumber
+	 * @return List<AllBooked>
+	 */
+	public List<AllBooked> getPersonalBooked(String staffNumber){
+		return managerDao.getPersonalBooked(staffNumber);
+	}
+	
 }

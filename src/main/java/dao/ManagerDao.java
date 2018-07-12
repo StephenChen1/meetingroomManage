@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import dtoout.AllBooked;
 import dtoout.MyBooked;
 import dtoout.MyRoom;
 import dtoout.AllRoom;
@@ -61,16 +62,42 @@ public interface ManagerDao {
 	// 查看会议室信息
 	MyRoom queryRoomByRoomNumber(@Param("roomNumber") String roomNumber);
 
+	
 	/**获取所有会议室信息
 	 * @param 无
 	 * @return 返回所有会议室的信息
 	 */
 	List<AllRoom> getAllRooms();
 
+	
 	/**
 	 * 根据id查询会议室获取该会议室信息
 	 * @param roomNumber
 	 * @return 该会议室信息数据
 	 */
 	AllRoom searchRoomById(String roomNumber);
+
+	
+	/**
+	 * 根据roomNumber删除会议室
+	 * @param roomNumber
+	 * @return boolean
+	 */
+	boolean deleteRoomById(String roomNumber);
+
+	
+	/**
+	 * 查看全部员工所有预约记录
+	 * @param 无
+	 * @return List<AllBooked>
+	 */
+	List<AllBooked> getAllBooked();
+	
+	
+	/**
+	 * 查看对应员工的所有预约记录
+	 * @param staffNumber
+	 * @return List<AllBooked>
+	 */
+	List<AllBooked> getPersonalBooked(String staffNumber);
 }

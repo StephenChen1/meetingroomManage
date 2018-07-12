@@ -89,6 +89,7 @@
 		device_id=#{deviceId}
 	</update>
 
+
 	<!-- 删除设备 -->
 	<delete id="deleteFromDevice">
 		delete from device
@@ -109,6 +110,59 @@
 		staff
 		where staff_number=#{staffNumber}
 	</select>
+
+	<!-- 新增一个结果映射，当查询所有预约记录或根据员工号查询对应预约记录的时候，作结果映射 -->
+	<resultMap id="allBooked" type="dtoout.AllBooked" >
+	    <id property="staffNumber" column="staff_number"/>
+	    <id property="roomNumber" column="room_number"/>
+	    <!--  此时对应会议室的容量，一对一映射 -->
+	    <association property="capability" column="room_number" select="getCapability"/>
+	    <!--  此时对应员工的多条预约记录，一对多映射 -->
+	    <collection property="bookedTime" column="time_booked_id" select="getBookedTime"/>
+  	</resultMap>
+  	
+  	 <!-- 查看全部员工所有预约记录 -->
+	<select id="getAllBooked" resultMap="allBooked">
+		select staff_number,room_number,capability,time_booked_id
+		from booked natural join meetingroom
+	</select>
+	
+	<!-- 获取对应员工的所有预约记录 -->
+	<select id="getPersonalBooked" resultMap="allBooked">
+		select staff_number,room_number,capability,time_booked_id
+		from booked natural join meetingroom
+		where staff_number=#{staffNumber}
+	</select>
+  	
+  	<!-- 获取对应会议室的容量 -->
+	<select id="getCapability" resultType="int"
+		parameterType="String">
+		select capability
+		from meetingroom
+		where room_number=#{room_number}
+	</select>	 
+	
+	<!-- 作getBookedTime结果映射 -->
+  	<resultMap id="bookedTime" type="dtoout.BookedTime" >
+	    <result property="startDate" column="start_date"/>
+	    <result property="endDate" column="end_date"/>
+	    <result property="startTime" column="start_time"/>
+	    <result property="endTime" column="end_time"/>
+  	</resultMap> 	
+  	  	
+  	<!-- 获取对应预约记录的预约时间段-->
+	<select id="getBookedTime" resultMap="bookedTime"
+		parameterType="int">
+		select start_date,end_date,start_time,end_time
+		from time_booked
+		where time_booked_id=#{time_booked_id}
+	</select>
+	
+	<!-- 根据会议室number删除会议室 -->
+	<delete id="deleteRoomById" parameterType="String">
+		delete from meetingroom
+		where room_number=#{roomNumber}
+	</delete>
 
 	<!-- 查看当前预约记录 -->
 	<select id="queryBookingByRoomNumber"
