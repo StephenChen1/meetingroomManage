@@ -2,16 +2,32 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace = "dao.StaffDao">
-  
-  <!-- 根据id查询员工 -->
-  <select id="queryStaffById" resultType = "staff" parameterType = "String">
-    select 
-       staff_number,name,level,birthday,phone,address
-    from
-       staff
-    where staff_number = #{id}
-  </select>
-  
-  
+<mapper namespace="dao.StaffDao">
+
+	<!-- 根据id查询员工（已测试） -->
+	<select id="queryStaffById" resultType="staff"
+		parameterType="String">
+		select
+		*
+		from
+		staff
+		where staff_number = #{id}
+	</select>
+
+	<!-- 添加员工 -->
+	<insert id="addStaff">
+		insert into staff
+		(staff_number,name,level,birthday,phone,address) values
+		(#{staff_number},#{name},#{level},#{birthday},#{phone},#{address})
+	</insert>
+
+	<!-- 修改员工 -->
+	<update id="modifyStaff">
+		update staff
+		set
+		name=#{name},phone=#{phone},birthday=#{birthday}
+		where
+		staff_number=#{id}
+	</update>
+
 </mapper>

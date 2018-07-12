@@ -42,6 +42,26 @@ public class StaffController {
 		return staff;
 	}
 
+	@RequestMapping("id")
+	@ResponseBody
+	public Map<String, Object> getStaffById(HttpServletRequest request) {
+		String staffNumber = request.getParameter("staffNumber");
+		Staff staff = staffService.getStaff(staffNumber);
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (staff == null) {
+			return map;
+		}
+		map.put("staffNumber", staff.getStaffNumber());
+		map.put("staffName", staff.getName());
+		map.put("level", staff.getLevel());
+		map.put("department", staff.getDepartment());
+		map.put("position", staff.getPosition());
+		map.put("birthday", staff.getBirthday());
+		map.put("phone", staff.getPhone());
+		map.put("address", staff.getAddress());
+		return map;
+	}
+
 	// 仅作JWT测试
 	// 正确用法：用户登陆后，用jwtService.create()创建token，并返回给用户
 	@RequestMapping("/createToken")
@@ -54,13 +74,13 @@ public class StaffController {
 			map.put("token", null);
 			return map;
 		}
-		//放入cookie中
+		// 放入cookie中
 		token = jwtService.create(staff_number);
 		Cookie cookie = new Cookie("token", token);
 		cookie.setMaxAge(7 * 24 * 60 * 60);// 设置时间为7天
 		cookie.setPath("/");
 		response.addCookie(cookie);
-		//返回token
+		// 返回token
 		map.put("token", token);
 		return map;
 	}

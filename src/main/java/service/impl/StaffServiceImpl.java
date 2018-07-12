@@ -14,9 +14,9 @@ public class StaffServiceImpl implements StaffService{
 	private StaffDao staffDao ;
 	
 	@Override
-	public Staff getStaff(String id) {
+	public Staff getStaff(String staffNumber) {
 		
-		Staff staff = staffDao.queryStaffById(id);
+		Staff staff = staffDao.queryStaffById(staffNumber);
 		
 		return staff;
 	}

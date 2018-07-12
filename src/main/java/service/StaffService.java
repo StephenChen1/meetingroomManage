@@ -4,6 +4,6 @@ import entity.Staff;
 
 public interface StaffService {
 
-	Staff getStaff(String id);
+	Staff getStaff(String staffNumber);
 	
 }

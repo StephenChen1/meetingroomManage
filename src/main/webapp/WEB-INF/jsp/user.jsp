@@ -19,6 +19,27 @@
         <script src="${basePath}resources/js/bootstrap.min.js"></script>
         <script>
             $(function() {
+            	//此代码用于测试根据会议室号查询会议室信息,测试完成后user.jsp的id为test的button要去掉这的"test"Id
+            	 /* $("#test").click(function(){
+            		    alert("点击了test按钮");
+            		    var roomNumber = "3500";
+            		    alert("roomNumber:" + roomNumber);
+            		    var data = {
+            		    		roomNumber:roomNumber
+            		    }
+            		    alert("roomNumber:" + roomNumber);
+            		    $.ajax({
+            		    	type : "post",
+            		    	url:"../room/searchById",
+            		    	contentType:"application/json",
+            		        data:JSON.stringify(data),
+            		        success:function(result){
+            		        	alert("success");
+            		        }
+            		    });
+            		  }); */
+            	
+            	
                 $(".meun-item").click(function() {
                     $(".meun-item").removeClass("meun-item-active");
                     $(this).addClass("meun-item-active");
@@ -123,9 +144,11 @@
                         		<button class="btn btn-yellow btn-xs" >预约会议室</button>
                     		</div>
                     		<div class="col-xs-7">
+
                         		<input type="date" id = "bookedDateInput" class="form-control input-sm" placeholder="输入日期">
                         		<input type="time" id = "bookedTimeInput"class="form-control input-sm" placeholder="输入时间">
                         		<button class="btn btn-white btn-xs ">查 询 </button>
+
                     		</div>
                     		<div class="col-lg-3  col-xs-3" style=" padding-right: 40px;text-align: right;">
                         		<label for="sortNowBooked">排序:&nbsp;</label>
