@@ -96,16 +96,16 @@
                 	<span id="topB" class="glyphicon  glyphicon-triangle-bottom  "></span> <span>预约管理</span>
                 </div>
                 <div id="collapseBookedFunction" class="collapse " aria-expanded="true">
-                	<div class="meun-item" href="#showNowBookedPane" aria-controls="showNowBookedPane" role="tab" data-toggle="tab"><img src="${basePath}resources/images/icon_house_grey.png">查看当前预约</div>
-                	<div class="meun-item" href="#showHistoryBookedPane" aria-controls="showHistoryBookedPane" role="tab" data-toggle="tab"><img src="${basePath}resources/images/icon_rule_grey.png">查看预约记录</div>
+                	<div class="meun-item" id = "nowBookedMenu" href="#showNowBookedPane" aria-controls="showNowBookedPane" role="tab" data-toggle="tab"><img src="${basePath}resources/images/icon_house_grey.png">查看当前预约</div>
+                	<div class="meun-item" id = "historyBookedMenu" href="#showHistoryBookedPane" aria-controls="showHistoryBookedPane" role="tab" data-toggle="tab"><img src="${basePath}resources/images/icon_rule_grey.png">查看预约记录</div>
             	</div>
             	<!-- 用户管理折叠 -->
             	<div class="meun-title" onClick="changeA()" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseStaffFunction" aria-expanded="true" aria-controls="collapseOne">
                 	<span id="top111" class="glyphicon  glyphicon-triangle-bottom  "></span> <span>用户管理</span>
                 </div>
                 <div id="collapseStaffFunction" class="collapse " aria-expanded="true">
-                	<div class="meun-item" href="#showStaffPane" aria-controls="showStaffPane" role="tab" data-toggle="tab"><img src="${basePath}resources/images/icon_house_grey.png">查看用户</div>
-                	<div class="meun-item" href="#modifyPassword" aria-controls="modifyPassword" role="tab" data-toggle="tab"><img src="${basePath}resources/images/icon_rule_grey.png">修改密码</div>
+                	<div class="meun-item" id="showUsersMenu" href="#showStaffPane" aria-controls="showStaffPane" role="tab" data-toggle="tab"><img src="${basePath}resources/images/icon_house_grey.png">查看用户</div>
+                	<div class="meun-item" id="modifyPassM" href="#modifyPassword" aria-controls="modifyPassword" role="tab" data-toggle="tab"><img src="${basePath}resources/images/icon_rule_grey.png">修改密码</div>
                 </div>
                 <!-- 设备管理折叠 -->
                 <div class="meun-title" onClick="changeA()" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseDeviceFunction" aria-expanded="true" aria-controls="collapseOne">
@@ -734,9 +734,10 @@
 							   <thead class="row tableHeader">
 							     <tr>
 								    <th class="col-xs-2">编号</th>
-									<th class="col-xs-3">预约员工</th>
+									<th class="col-xs-2">预约员工</th>
 									<th class="col-xs-2">会议室号</th>
-									<th class="col-xs-5">预约时段</th>
+									<th class="col-xs-4">预约时段</th>
+									<th class="col-xs-2">状态</th>
 								 </tr>
 							   </thead>
 							   <tbody class="tablebody" id = "showHistoryBookedBody">
@@ -1234,6 +1235,11 @@
 		<script src="${basePath}resources/js/manager.modifyRoom.js"></script>
 		<script src="${basePath}resources/js/exitLogin.js"></script>
 		<script src="${basePath}resources/js/manager.commom.js"></script>
+		<script src="${basePath}resources/js/manager.showRoom.js"></script>
+		<script src="${basePath}resources/js/manager.showNowBooked.js"></script>
+		<script src="${basePath}resources/js/manager.showHistoryBooked.js"></script>
+		<script src="${basePath}resources/js/manager.showUser.js"></script>
+	
 	</body>
 
 </html>

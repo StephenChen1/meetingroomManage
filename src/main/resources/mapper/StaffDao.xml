@@ -37,4 +37,11 @@
 		where staff_number=#{staffNumber}
 	</update>
 	
+	<!-- 查找所有员工 -->
+	<select id="queryAll" resultType="staff" parameterType="String">
+		select
+		*
+		from  staff
+	</select>
+	
 </mapper>

@@ -4,7 +4,7 @@
 (function ($) {
 	
 	//显示员工信息
-	$.showHistoryBooked = function(staff , i){
+	$.showStaff = function(staff , i){
 		//得到员工工号
 		var staffNumber = staff.staffNumber;
 		//员工姓名
@@ -40,7 +40,7 @@ $(document).ready(function(){
 	var allStaff ;
 	
 	//点击左侧菜单即可显示所有员工信息
-	$("#").click(function(){
+	$("#showUsersMenu").click(function(){
 		//从后台得到所有员工的数据
 		//请求参数：无
 		$.ajax({

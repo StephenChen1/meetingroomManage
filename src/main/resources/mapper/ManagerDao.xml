@@ -115,15 +115,17 @@
 	<resultMap id="allBooked" type="dtoout.AllBooked" >
 	    <id property="staffNumber" column="staff_number"/>
 	    <id property="roomNumber" column="room_number"/>
+	    <result property="status" column="status"/>
 	    <!--  此时对应会议室的容量，一对一映射 -->
 	    <association property="capability" column="room_number" select="getCapability"/>
 	    <!--  此时对应员工的多条预约记录，一对多映射 -->
 	    <collection property="bookedTime" column="time_booked_id" select="getBookedTime"/>
+  		
   	</resultMap>
   	
   	 <!-- 查看全部员工所有预约记录 -->
 	<select id="getAllBooked" resultMap="allBooked">
-		select staff_number,room_number,capability,time_booked_id
+		select staff_number,room_number,capability,time_booked_id,status
 		from booked natural join meetingroom
 	</select>
 	

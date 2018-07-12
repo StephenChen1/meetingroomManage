@@ -10,21 +10,19 @@
   		  //得到容纳人数
   		  var capability = room.capability ;
   		  //遍历得到所有空闲时间
-  		  var freeText ;
-  		  for(var j = 0 ; j< room.freeTime.length ; j++){
-  			  freeText = freeText + room.freeTime[j].startDate +
-  			  			"~" + room.freeTime[j].endDate + 
-  			  			" " + room.freeTime[j].startTime +
-  			  			"~" + room.freeTime[j].endTime +"\n"
-  			  ;
+  		  var freeText ="";
+  		  for(var j = 0 ; j< room.freetime.length ; j++){
+  			  freeText = freeText + room.freetime[j].startDate +
+  			  			"~" + room.freetime[j].endDate + 
+  			  			" " + room.freetime[j].startTime +
+  			  			"~" + room.freetime[j].endTime +"<br>";
   		  }
   		  
   		  //得到设备信息//TODO
-  		  var deviceText ;
-  		  for(var j = 0 ; j <room.device.length ; j ++){
-  			  deviceText = deviceText + room.device[j].name +
-  			      			"*" + room.device[j].count +"\n"
-  			  ;
+  		  var deviceText ="";
+  		  for(var j = 0 ; j <room.myDevice.length ; j ++){
+  			  deviceText = deviceText + room.myDevice[j].deviceName +
+  			      			" * " + room.myDevice[j].count +"<br>";
   		  }
   		  
   		  $("#showRoomBody").append('<tr><td class = "index">'+ i +
@@ -66,7 +64,7 @@ $(document).ready(function(){
 	        //data:JSON.stringify(data),
 	    	//data:data,
 	        success:function(result){
-	        	
+	        	//alert("组");
 	        	//保存数据到全局变量
 	        	allModifyRoom = result ;
 	        	

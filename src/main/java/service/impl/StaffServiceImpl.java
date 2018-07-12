@@ -1,5 +1,7 @@
 package service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +31,12 @@ public class StaffServiceImpl implements StaffService{
 		// TODO 自动生成的方法存根
 		return staffDao.modifyInfo(staffNumber,newStaffNumber,newName,newPhone
 				,newBirthday,newAddress,newDepartment,newPosition);
+	}
+
+	@Override
+	public List<Staff> getAllStaff() {
+		List<Staff> staffs = staffDao.queryAll();
+		return staffs;
 	}
 
 }

@@ -41,18 +41,19 @@
 
 
 
-$(ducument).ready(function(){
+$(document).ready(function(){
 	
 	//定义全局变量，保存所有预约记录
 	var allHistoryBooked ;
 	
-	
+	$("#showUsersMenu").click(function(){
 	//点击左侧菜单，即将苏朋友历史预约记录从后台得到
 	//请求参数：无
 	//返回数据和用户界面查看我的预约记录形式相似，返回对象数组，对象中包含着一次预约的时间、会议室和员工
 	$.ajax({
     	type : "post",
-    	url:"../booked/getAllHistoryBooked",
+    	//url:"../booked/getAllHistoryBooked",
+    	url:"../booked/getAll",
     	//contentType:"application/json",
         //data:JSON.stringify(data),
     	//data:data,
@@ -68,7 +69,7 @@ $(ducument).ready(function(){
         	}
         }
 	});
-	
+  })
 	//查询按钮点击事件
 	//TODO
 	

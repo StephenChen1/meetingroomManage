@@ -5,6 +5,7 @@ public class AllBooked {
 	private String roomNumber;
 	private int capability;
 	private BookedTime bookedTime;
+	private int status ;
 
 	public String getStaffNumber() {
 		return staffNumber;
@@ -37,4 +38,14 @@ public class AllBooked {
 	public void setBookedTime(BookedTime bookedTime) {
 		this.bookedTime = bookedTime;
 	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+	
+	
 }
