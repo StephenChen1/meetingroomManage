@@ -182,8 +182,8 @@ public class LoginController {
 		String staffNumber = map.get("staffNumber").toString();
 		String oldPass = map.get("oldPass").toString();
 		String newPass = map.get("newPass").toString();
-		System.out.println("已进入modifyPassword方法");
-		System.out.println(staffNumber+"   "+oldPass+"   "+newPass);
+		//System.out.println("已进入modifyPassword方法");
+		//System.out.println(staffNumber+"   "+oldPass+"   "+newPass);
 		boolean isOK = loginService.modifyPassword(staffNumber,oldPass,newPass);
 		//System.out.println("ISOK：" + isOK);
 		return isOK;

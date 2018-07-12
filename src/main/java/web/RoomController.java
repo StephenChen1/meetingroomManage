@@ -119,5 +119,24 @@ public class RoomController {
 		}*/
 		return allBooked;
 	}
+	
+	/**
+	 * 修改会议室容量
+	 * @param 会议室编号roomNumber
+	 * @param 新容量newCapability
+	 * @return boolean
+	 */
+	@RequestMapping(value = "/modifyCapability", method = RequestMethod.POST)
+	@ResponseBody
+	public boolean modifyPassword(@RequestBody(required=false) Map<String,Object> map) {
+		String roomNumber = map.get("roomNumber").toString();
+		int newCapability = Integer.valueOf(map.get("newCapability").toString());
+		//System.out.println("已进入modifyCapability方法");
+		//System.out.println(roomNumber+"   "+newCapability);
+		//boolean isOK = true;
+		boolean isOK = managerService.modifyCapability(roomNumber,newCapability);
+		//System.out.println("ISOK：" + isOK);
+		return isOK;
+	}
 
 }

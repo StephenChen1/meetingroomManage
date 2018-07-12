@@ -20,34 +20,24 @@
         <script>
             $(function() {
             	//此代码用于测试根据会议室号查询会议室信息,测试完成后user.jsp的id为test的button要去掉这的"test"Id
-            	 	 /* $("#test").click(function(){
+            	 	  /* $("#test").click(function(){
             		    alert("test按钮");
-            		    var newStaffNumber = "1111";
-            		    var newName = "1111";
-            		    var newPhone = "1111";
-            		    var newBirthday = "1111";
-            		    var newAddress = "1111";
-            		    var newDepartment = "1111";
-            		    var newPosition = "1111";
+            		    var roomNumber = "90";
+            		    var newCapability = "90";
             		    var data = {
-            		    		newStaffNumber:newStaffNumber,
-            		    		newName:newName,
-            		    		newPhone:newPhone,
-            		    		newBirthday:newBirthday,
-            		    		newAddress:newAddress,
-            		    		newDepartment:newDepartment,
-            		    		newPosition:newPosition
+            		    		roomNumber:roomNumber,
+            		    		newCapability:newCapability
             		    }
             		    $.ajax({
             		    	type : "post",
-            		    	url:"../staff/modifyInfo",
+            		    	url:"../room/modifyCapability",
             		    	contentType:"application/json",
             		        data:JSON.stringify(data),
             		        success:function(result){
             		        	alert("success");
             		        }
             		    });
-            		  }); */
+            		  });  */
             	
             	
                 $(".meun-item").click(function() {
