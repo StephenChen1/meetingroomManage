@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import dtoout.CanBooked;
 import entity.Staff;
 
 public interface StaffDao {
@@ -42,11 +43,15 @@ public interface StaffDao {
 
 	//修改个人信息，区别修改员工资料
 	boolean modifyInfo(@Param("staffNumber")String staffNumber,@Param("newStaffNumber")String newStaffNumber, @Param("newName")String newName, @Param("newPhone")String newPhone,
-			@Param("newBirthday")String newBirthday, @Param("newAddress")String newAddress, @Param("newDepartment")String newDepartment,
+			@Param("newEmail")String newEmail,@Param("newBirthday")String newBirthday, @Param("newAddress")String newAddress, @Param("newDepartment")String newDepartment,
 			@Param("newPosition")String newPosition);
 
 	//查找所有员工
 	List<Staff> queryAll();
 
+	
+	//得到所有可预约时间段
+	List<CanBooked> queryAllCanBooked();
+	
 
 }

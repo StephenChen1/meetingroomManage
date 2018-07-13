@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,6 +20,7 @@ import dtoin.SetFreeTime;
 import dtoout.AllBooked;
 import dtoout.AllRoom;
 import entity.RoomDevice;
+import service.JwtService;
 import service.ManagerService;
 
 
@@ -31,7 +33,8 @@ public class RoomController {
 	private ManagerService managerService;
 	@Autowired
 	private ManagerDao managerDao;
-	
+	@Autowired
+	private JwtService jwtService;
 	
 
 	/**
@@ -147,8 +150,14 @@ public class RoomController {
 	 */
 	@RequestMapping("/getPersonalBooked")
 	@ResponseBody
-	public List<AllBooked> getPersonalBooked(@RequestBody(required=false) Map<String,Object> map) {
-		String staffNumber = map.get("staffNumber").toString();
+	public List<AllBooked> getPersonalBooked(@CookieValue(value = "token", required = false) String token) {
+		//String staffNumber = map.get("staffNumber").toString();
+		
+		if (token == null) {
+			return null;
+		}
+		String staffNumber = jwtService.getStaffNum(token);
+		//System.out.println("LL:"+staffNumber);
 		List<AllBooked> allBooked=managerDao.getPersonalBooked(staffNumber);
 		//注释代码用于测试
 		/*System.out.println("这里是Controller外的staffNumber: " + staffNumber);
@@ -161,6 +170,7 @@ public class RoomController {
 			System.out.println(freetime.getStartDate()+"  "+freetime.getEndDate()+"  "+freetime.getStartTime()+"  "+freetime.getEndTime());
 			System.out.println("\n\n");
 		}*/
+		
 		return allBooked;
 	}
 	

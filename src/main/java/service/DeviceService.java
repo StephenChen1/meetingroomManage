@@ -13,4 +13,13 @@ public interface DeviceService {
 	 */
 	List<Device> getAllDevice();
 	
+	//增加设备信息
+	boolean addOneDevice(String deviceName,String deviceType);
+	
+	//修改设备信息
+	boolean modifyOneDevice(String deviceId,String deviceName ,String deviceType);
+	
+	//删除设备
+	boolean deleteOneDevice(String deviceId);
+	
 }

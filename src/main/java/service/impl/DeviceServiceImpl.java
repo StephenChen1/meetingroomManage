@@ -21,6 +21,25 @@ public class DeviceServiceImpl implements DeviceService {
 		return devices;
 	}
 
+	//新增设备
+	@Override
+	public boolean addOneDevice(String deviceName, String deviceType) {
+		boolean success = deviceDao.addDevice(deviceName, deviceType);
+		return success;
+	}
+
+	@Override
+	public boolean modifyOneDevice(String deviceId, String deviceName, String deviceType) {
+		boolean success = deviceDao.modifyDevice(deviceId, deviceName, deviceType);
+		return success;
+	}
+
+	@Override
+	public boolean deleteOneDevice(String deviceId) {
+		boolean success = deviceDao.deleteDeviceById(deviceId);
+		return success;
+	}
+
 	
 	
 }

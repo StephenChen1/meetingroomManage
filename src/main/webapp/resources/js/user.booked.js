@@ -6,45 +6,41 @@
         //函数定义，将可预约对象展示在查看可预约表格中
 		//参数为会议室对象和第几个会I也是记录
         $.showCanBooked = function (canBooked,i) {
+        	
+        	//可预订时段id
+        	var canBookedId = canBooked.canBookedId ;
         	//得到会议室编号
         	var roomNumber = canBooked.roomNumber;
         	//得到会议室容纳人数
         	var capability = canBooked.capability;
         	//得到设备信息字符串
-        	var devicesText ;
+        	/*var devicesText ;
         	for(var j = 0 ; j < canBooked.devices.length ; j++){
         		devicesText = devicesText + canBooked.devices[j].name +"*" +
         		devicesText + canBooked.devices[j].count +"\n";
-        	}
+        	}*/
         	
         	//得到该可预约时间段id（不展示出来，预约时会上传至后台，方便判断）
         	var canBookedId = canBooked.timeCanBookedId ;
         	
         	//得到可预约时间段字符串组合，一个时间段写一行数据
-        	var canBookedText ;
-        	for(var j = 0 ; j < canBooked.time.length ; j++){
-        		canBookedText = canBooked.time[j].startDate + "~" +
-        						canBooked.time[j].endDate +"  " +
-        						canBooked.time[j].startTime+ "~" +
-        						canBooked.time[j].endTime +"\n";
+        	var canBookedText ="";
+        	
+        	canBookedText = canBooked.startDate + "~" +
+        						canBooked.endDate +"  " +
+        						canBooked.startTime+ "~" +
+        						canBooked.endTime +"\n";
         		        		
         		//表格行字符串
-            	var row = '<tr><td>'+(i+j)+
+            	var row = '<tr><td class = "index">'+ i +
             				'</td><td class = "roomNumber">'+roomNumber +
             				'</td><td>' +capability +
-            				'</td><td>' +devicesText +
-            				'</td><td class = "timeId" value="'+canBooked.time[j].timeId+'">' +canBookedText +
+            				'</td><td class = "canBookedId" value="'+canBooked.canBookedId+'">' +canBookedText +
             				'</td><td>' +'<button class="btn btn-success btn-xs bookedPop" >预约</button>'+ 
             			  '</td></tr>';
             	//往表格添加一行
             	$("#BookedBody").append(row);
-        		
-        		
-        	}
-        
-        	
-        	
-        	
+
         	
         }
 })(jQuery);       
@@ -58,11 +54,20 @@ $(document).ready(function(){
 	var allCanBookedTime ;
 	//定义全局变量，预约时间id，点击表格预约按钮即可更新该值
 	var timeId ;
+	//时间全局变量，方便提交时进行判断
+	//定义当前行开始日期
+	var startDate ;
+	//定义当前行结束日期
+	var endDate  ;
+	//定义当前行开始时间
+	var startTime ; 
+	//定义当前行结束时间
+	var endTime ; 
 	
 	
 	//点击左侧预约菜单及从后台得到最新的可预约数据
 	$("#userBookedRoom").click(function(){
-		
+		//alert("888");
 		//请求参数无，后台获取所有会议室可预约时间，
 		//一个时间段一行，点击预约,最小时间最大时间受此限制
 		//返回的是可预约表的全部内容，为对象数组，一个会议室封装成一个对象
@@ -71,7 +76,7 @@ $(document).ready(function(){
 		//可预约时间包括可预约id，开始日期，结束日期，开始时间，结束时间
 		$.ajax({
 	    	type : "post",
-	    	url:"../timeCanBooked/getAll",
+	    	url:"../staff/getAllCanBooked",
 	    	//contentType:"application/json",
 	        //data:JSON.stringify(data),
 	    	//data:data,
@@ -88,7 +93,7 @@ $(document).ready(function(){
 	        		//调用方法展示每一条记录
 	        		$.showCanBooked(result[i],(i+1));
 	        		//得到当前编号，一条时间段就一个编号
-	        		index = index + result[i].time.length ;
+	        		//index = index + result[i].time.length ;
 	        	}
 	        }
 		});
@@ -100,42 +105,57 @@ $(document).ready(function(){
 		//弹出模态框
 		$("#bookedPop").modal("toggle");
 		//将开始时间，结束时间，最大时间，最小时间设定，填进模态框
+		//得到当前行号
+		var index = $(this).parents("tr").find(".index").text();
+		
 		//得到当前行会议室号
 		var roomNumber = $(this).parents("tr").find(".roomNumber").text();
 		//得到当前时间段id
-		 timeId = $(this).parents("tr").find(".timeId").attr("value");
-		//定义当前行开始日期
-		var startDate ;
-		//定义当前行结束日期
-		var endDate  ;
-		//定义当前行开始时间
-		var startTime ; 
-		//定义当前行结束时间
-		var endTime ; 
+		 timeId = $(this).parents("tr").find(".canBookedId").attr("value");
+		 //alert(index);
+		 //alert(roomNumber);
+		 //alert("timeId1:"+timeId);
+		
 		
 		for(var i = 0 ; i　< allCanBookedTime.length ; i++){
-			if(allCanBookedTime[i].roomNumber == roomNumber){
-				for(var j = 0 ; j < allCanBookedTime[i].time.length ; j++){
-					if(j < allCanBookedTime[i].time[j].timeId == timeId){
-						//找到了这个时间段,得到时间
-						startDate = allCanBookedTime[i].time[j].startDate;
-						endDate = allCanBookedTime[i].time[j].endDate;
-						startTime = allCanBookedTime[i].time[j].startTime;
-						endTime = allCanBookedTime[i].time[j].endTime;
-						break ;
-					}
-				}
-				break ;
+			if(allCanBookedTime[i].canBookedId == timeId){			
+					
+					//找到了这个时间段,得到时间
+					startDate = allCanBookedTime[i].startDate;
+					endDate = allCanBookedTime[i].endDate;
+					startTime = allCanBookedTime[i].startTime;
+					endTime = allCanBookedTime[i].endTime;
+					break ;
 			}
 		}
 		
-	
+		//alert(startDate);
+		//alert(endDate);
+		//alert(startTime);
+		//alert(endTime);
 		
+		//用这些时间设置输入框
+		//会议室号
+		$("#roomNumberBooked").val(roomNumber);
+		$("#roomNumberBooked").attr("disabled", true); //设置为不可编辑
+		//开始日期(设置默认值和最大最小值）
+		$("#startDateBooked").val(startDate);
+		$('#startDateBooked').attr('min',startDate);
+		$('#startDateBooked').attr('max',endDate);
+		//结束日期(设置默认值和最大最小值）
+		$("#endDateBooked").val(endDate);
+		$('#endDateBooked').attr('min',startDate);
+		$('#endDateBooked').attr('max',endDate);
+		//开始时间(设置默认值和最大最小值）
+		$("#startTimeBooked").val(startTime);
+		$('#startTimeBooked').attr('min',startTime);
+		$('#startTimeBooked').attr('max',endTime);
+		//结束时间(设置默认值和最大最小值）
+		$("#endTimeBooked").val(endTime);
+		$('#endTimeBooked').attr('min',startTime);
+		$('#endTimeBooked').attr('max',endTime);
 		
-		
-		
-		
-		
+
 		
 	});
 	
@@ -144,10 +164,12 @@ $(document).ready(function(){
 	//预约弹出框预约按钮点击事件
 	$("#confirmBooked").click(function(){
 		
+		//alert("点击保存");
+		
 		//得到会议室号
-		var roomNumber = $(this).parents("tr").find(".roomNumber").text();
+		var roomNumber = $("#roomNumberBooked").val();
 		//得到时间段id
-		var timeId = timeId;
+		//alert("timeId:" + timeId);
 		//得到开始日期
 		var startDate = $("#startDateBooked").val();
 		//得到结束日期
@@ -168,6 +190,15 @@ $(document).ready(function(){
 					endTime:endTime
 			}
 			
+			
+			//alert(roomNumber);
+			//alert(timeId);
+			//alert(startDate);
+			//alert(endDate);
+			//alert(startTime);
+			//alert(endTime);
+			
+			//接口未开放
 			//发送该预约记录给后台,预约
 			$.ajax({
 		    	type : "post",
@@ -177,8 +208,9 @@ $(document).ready(function(){
 		    	data:data,
 		        success:function(result){
 		        	//TODO返回布尔值
-		        	if(result){
-		        		//TODO
+		        	if(result.length > 0){
+		        		//返回的是数组，但数组可能为空
+		        		alert("预约已提交");
 		        	}
 		        }
 			});

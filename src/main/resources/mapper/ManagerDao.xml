@@ -125,13 +125,13 @@
   	
   	 <!-- 查看全部员工所有预约记录 -->
 	<select id="getAllBooked" resultMap="allBooked">
-		select staff_number,room_number,capability,time_booked_id,status
+		select staff_number,room_number,status,capability,time_booked_id
 		from booked natural join meetingroom
 	</select>
 	
 	<!-- 获取对应员工的所有预约记录 -->
 	<select id="getPersonalBooked" resultMap="allBooked">
-		select staff_number,room_number,capability,time_booked_id
+		select staff_number,room_number,status,capability,time_booked_id
 		from booked natural join meetingroom
 		where staff_number=#{staffNumber}
 	</select>

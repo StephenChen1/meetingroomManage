@@ -117,8 +117,8 @@
                 	<span id="top111" class="glyphicon  glyphicon-triangle-bottom  "></span> <span>个人信息</span>
                 </div>
                 <div id="collapseStaffFunction" class="collapse " aria-expanded="true">
-                	<div class="meun-item" id = "modifyMyInfoMenu" href="#modifyInformation" aria-controls="modifyInformation" role="tab" data-toggle="tab"><img src="${basePath}resources/images/icon_house_grey.png">修改个人信息</div>
-                	<div class="meun-item" href="#modifyPassword" aria-controls="modifyPassword" role="tab" data-toggle="tab"><img src="${basePath}resources/images/icon_rule_grey.png">修改密码</div>
+                	<div class="meun-item" id = "modifyMyInfoMenu1" href="#modifyInformation" aria-controls="modifyInformation" role="tab" data-toggle="tab"><img src="${basePath}resources/images/icon_house_grey.png">修改个人信息</div>
+                	<div class="meun-item" id = "modifyMyPassMenu" href="#modifyPassword" aria-controls="modifyPassword" role="tab" data-toggle="tab"><img src="${basePath}resources/images/icon_rule_grey.png">修改密码</div>
                 </div>
             	</div>
             </div>
@@ -166,10 +166,10 @@
 							   <caption><div align="center" class="text-success" id = "bookedTableTip">可预约信息</div></caption>
 							   <thead class="row tableHeader">
 							     <tr>
-								    <th class="col-xs-1">编号</th>
-									<th class="col-xs-1">会议室号</th>
+								    <th class="col-xs-2">编号</th>
+									<th class="col-xs-2">会议室号</th>
 									<th class="col-xs-2">容纳人数</th>
-									<th class="col-xs-2">设备信息</th>
+									<!-- <th class="col-xs-2">设备信息</th> -->
 									<th class="col-xs-4">可预约时段</th>
 									<th class="col-xs-2">操作</th>
 								 </tr>
@@ -179,11 +179,11 @@
 							         <td>1</td>
 							         <td>10001</td>
 							         <td>100</td>
-							         <td>
-							         	<!-- 可以点击弹出框查看会议室设备的详情 -->
+							         <!-- <td>
+							         	可以点击弹出框查看会议室设备的详情
 							            <p  style = "cursor:pointer;" data-toggle="modal" data-target="#showDeviceDetailPop">桌子*120</p>	
 							         	<p  style = "cursor:pointer;" data-toggle="modal" data-target="#showDeviceDetailPop">椅子*120</p>	
-							         </td> 
+							         </td>  -->
 							         <td>
 							         	  2018-04-05~2-18-07-09 8:00~17:00
 							         </td>
@@ -277,7 +277,7 @@
                 		<div class="data-div">
                     		<!--自己写table -->
 							<table class = "table" id = "showMyHistoryTable">
-							   <caption><div align="center" class="text-success" id = "modifyMeetingTableTip">当前预约记录</div></caption>
+							   <caption><div align="center" class="text-success" id = "modifyMeetingTableTip">我的预约记录</div></caption>
 							   <thead class="row tableHeader">
 							     <tr>
 								    <th class="col-xs-2">编号</th>
@@ -288,10 +288,10 @@
 								 </tr>
 							   </thead>
 							   <tbody class="tablebody" id = "showMyHistoryBody">
-							      <tr>
+							      <!-- <tr>
 							         <td>1</td>
 							         <td>
-							         	<!-- 可以点击弹出框查看预约员工的详情 -->
+							         	可以点击弹出框查看预约员工的详情
 							            <p  style = "cursor:pointer;" data-toggle="modal" data-target="#showRoomDetailPop">10001</p>	
 							         </td>
 							         <td>100</td>
@@ -299,7 +299,7 @@
 							         	 2018-07-21 09:30~16:00<br>
 							         </td>
 							         <td class = "text-danger">已取消</td>
-							      </tr>
+							      </tr> -->
 							   </tbody>
 							</table>
                 		</div>
@@ -323,7 +323,7 @@
                                 <div class="form-group">
                             		<label for="myName" class="col-xs-4 control-label">姓名：</label>
                             		<div class="col-xs-5">
-                                		<input type="text" class="form-control input-sm duiqi" id="myName" placeholder="" style="margin-top: 7px;">
+                                		<input type="text" class="form-control input-sm duiqi" id="myName" placeholder="222" style="margin-top: 7px;">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -345,16 +345,26 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
+                            		<label for="myPhone" class="col-xs-4 control-label">邮箱：</label>
+                            		<div class="col-xs-5">
+                                		<input type="text" class="form-control input-sm duiqi" id="myEmail" placeholder="" style="margin-top: 7px;">
+                                    </div>
+                                </div>
+                                <div class="form-group">
                             		<label for="myBirthday" class="col-xs-4 control-label">生日：</label>
                             		<div class="col-xs-5">
-                                		<input type="text" class="form-control input-sm duiqi" id="myBirthday" placeholder="" style="margin-top: 7px;">
+                                		<input type="date" class="form-control input-sm duiqi" id="myBirthday"  style="margin-top: 7px;">
                                     </div>
                                 </div>
                                 <div class="form-group">
                             		<label for="myAddress" class="col-xs-4 control-label">住址：</label>
-                            		<div class="col-xs-5">
+                            		<!-- <div class="col-xs-5">
                                 		<input type="text" class="form-control input-sm duiqi" id="myAddress" placeholder="" style="margin-top: 7px;">
+                                    </div> -->
+                                    <div class="col-xs-5">
+                                		<textarea class="form-control input-sm duiqi" id="myAddress" style="margin-top: 7px;" rows="3" cols="20">输入住址..</textarea>
                                     </div>
+                                    
                                 </div>
                                 
                                 
@@ -581,6 +591,9 @@
 		<script src="${basePath}resources/js/jquery.nouislider.js"></script>
 		<script src="${basePath}resources/js/exitLogin.js"></script>
 		<script src="${basePath}resources/js/user.commom.js"></script>
+		<script src="${basePath}resources/js/user.modifyInfo.js"></script>
+		<script src="${basePath}resources/js/user.modifyMyPassword.js"></script>
+		<script src="${basePath}resources/js/user.myBookedRecord.js"></script>
+		<script src="${basePath}resources/js/user.booked.js"></script> 
 	</body>
-
 </html>

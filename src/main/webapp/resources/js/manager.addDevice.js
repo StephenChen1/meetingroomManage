@@ -3,8 +3,8 @@
 $(document).ready(function(){
 	
 	//弹出框确定按钮点击事件
-	$("#addDeviceMenu").click(function(){
-		
+	$("#confirmAddDevice").click(function(){
+		//alert("点击了增加设备");
 		//得到设备名
 		var deviceName = $("#deviceNameInput").val();
 		//得到设备型号
@@ -26,7 +26,7 @@ $(document).ready(function(){
 	        	//返回该设备信息，显示在表格上
 	        	//表格行字符串
 	        	var row = '<tr><td>'+ 1 +
-	        				'</td><td>'+result.deviceId +
+	        				'</td><td>'+" "+
 	        				'</td><td>' +result.deviceName +
 	        				'</td><td>' +result.deviceType +				
 	        			  '</td></tr>';

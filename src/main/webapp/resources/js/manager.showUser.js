@@ -59,7 +59,7 @@ $(document).ready(function(){
 	        	for(var i = 0 ; i < result.length ; i++){
 	        		//调用自定义函数展示在表格中
 	        		$.showStaff(result[i],(i+1));
-	        	}
+	        	}        
 	        	
 	        }
 		});

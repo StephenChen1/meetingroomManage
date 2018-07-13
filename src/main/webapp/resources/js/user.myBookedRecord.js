@@ -6,16 +6,17 @@
 	//显示一条预约记录
 	$.showMyBooked = function(oneBooked , i){
 		//会议室号
-		var roomNumer = oneBooked.roomNumber ;
+		var roomNumber = oneBooked.roomNumber ;
 		//容纳人数
 		var capability = oneBooked.capability ;
 		//预约时间字符串
-		var timeText = oneBooked.startDate + "~" +
-					   oneBooked.endDate + " " +
-					   oneBooked.startTime + "~" +
-					   oneBooked.endTime ;
+		var timeText = oneBooked.bookedTime.startDate + "~" +
+					   oneBooked.bookedTime.endDate + " " +
+					   oneBooked.bookedTime.startTime + "~" +
+					   oneBooked.bookedTime.endTime ;
 		//状态（即备注）
 		var status = oneBooked.status ;
+		//alert("status:"+status);
 		var statusText ;
 		if(status == 0){
 			statusText = '<td class ="text-danger">已取消</td>';
@@ -49,21 +50,21 @@ $(document).ready(function(){
 	
 	//点击左侧菜单即可得到我的预约记录
 	$("#userBookedRecord").click(function(){
-		
+		//alert("我的预约记录");
 		//从后台得到我的预约记录
 		//请求参数：我的id
 		//得到我的id
 		var staffNumber = $("#userId").text();
-		var data = {
+		/*var data = {
 				staffNumber:staffNumber	
-		}
+		}*/
 		//传到后台得到我的预约记录
 		$.ajax({
 	    	type : "post",
-	    	url:"../booked/getByStaffNumber",
+	    	url:"../room/getPersonalBooked",
 	    	//contentType:"application/json",
 	        //data:JSON.stringify(data),
-	    	data:data,
+	    	//data:data,
 	        success:function(result){
 	        	//得到预约信息对象数组
 	        	allMyBooked = result ;
@@ -71,7 +72,7 @@ $(document).ready(function(){
 	        	$("#showMyHistoryBody").find("tr").remove();
 	        	//显示在表格上
 	        	for(var i = 0 ; i < result.length ; i ++){
-	        		$.showMyBooked(result[i]);
+	        		$.showMyBooked(result[i],(i+1));
 	        	}
 	        
 	        }

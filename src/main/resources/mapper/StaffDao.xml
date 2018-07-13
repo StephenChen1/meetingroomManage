@@ -33,7 +33,7 @@
 	<!-- 修改个人信息 -->
 	<update id="modifyInfo">
 		update staff
-		set staff_number=#{newStaffNumber},name=#{newName},department=#{newDepartment},position=#{newPosition},birthday=#{newBirthday},phone=#{newPhone},address=#{newAddress}
+		set staff_number=#{newStaffNumber},name=#{newName},department=#{newDepartment},position=#{newPosition},birthday=#{newBirthday},phone=#{newPhone},address=#{newAddress},email=#{newEmail}
 		where staff_number=#{staffNumber}
 	</update>
 	
@@ -43,5 +43,27 @@
 		*
 		from  staff
 	</select>
+	
+	<resultMap id="canBooked" type="dtoout.CanBooked" >
+	    <id property="canBookedId" column="can_book_id"/>
+	    <id property="roomNumber" column="room_number"/>
+	    <result property="capability" column="capability"/>
+	    <result property="startDate" column="start_date"/>
+	    <result property="endDate" column="end_date"/>
+	    <result property="startTime" column="start_time"/>
+	    <result property="endTime" column="end_time"/>
+	    
+  	</resultMap>
+	
+	
+	
+	<!-- queryAllCanBooked得到所有可预约时间段 -->
+	<select id="queryAllCanBooked" resultMap="canBooked" >
+		select
+			can_book_id,room_number,capability,start_date,end_date,start_time,end_time
+		from  
+			can_book natural join meetingroom 
+	</select>
+	
 	
 </mapper>

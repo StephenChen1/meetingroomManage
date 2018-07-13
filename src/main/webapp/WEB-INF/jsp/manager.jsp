@@ -113,7 +113,7 @@
                 </div>
                 <div id="collapseDeviceFunction" class="collapse " aria-expanded="true">
                 	<div class="meun-item" id = "addDeviceMenu" href="#addDevicePane" aria-controls="addDevicePane" role="tab" data-toggle="tab"><img src="${basePath}resources/images/icon_house_grey.png">新增设备</div>
-                	<div class="meun-item" id = "modifyDeviceMenu" href="#modifyDevicePane" aria-controls="modifyDevicePane" role="tab" data-toggle="tab"><img src="${basePath}resources/images/icon_rule_grey.png">删除设备</div>
+                	<div class="meun-item" id = "modifyDeviceMenu" href="#modifyDevicePane" aria-controls="modifyDevicePane" role="tab" data-toggle="tab"><img src="${basePath}resources/images/icon_rule_grey.png">修改设备</div>
                 	<div class="meun-item" id = "showDeviceMenu" href="#showDevicePane" aria-controls="showDevicePane" role="tab" data-toggle="tab"><img src="${basePath}resources/images/icon_card_grey.png">查看设备</div>      	
             	</div>
             	</div>
@@ -869,12 +869,12 @@
 								 </tr>
 							   </thead>
 							   <tbody class="tablebody" id = "addDeviceBody">
-							      <tr>
+							      <!-- <tr>
 							         <td>1</td>
 							         <td>00001</td>
 							         <td>桌子</td>
 							         <td>小米</td>
-							      </tr>
+							      </tr> -->
 							   </tbody>
 							</table>
                 		</div>
@@ -942,8 +942,8 @@
 									<th class="col-xs-3">操作</th>
 								 </tr>
 							   </thead>
-							   <tbody class="tablebody" id = "modifyDeviceBody">
-							      <tr>
+							   <tbody class="tablebody" id = "modifyDeviceBody1">
+							      <!-- <tr>
 							         <td>1</td>
 							         <td>00001</td>
 							         <td>桌子</td>							         
@@ -954,14 +954,14 @@
                                 			<button class="btn btn-success btn-xs" data-toggle="modal" data-target="#deleteDevicePop">删除</button>
                             			</div>
 							         </td>
-							      </tr>
+							      </tr> -->
 							   </tbody>
 							</table>
                     	
                 		</div>
                
                         <!--修改设备信息弹出窗口-->
-                		<div class="modal fade" id="modifyDevicePop" role="dialog" aria-labelledby="gridSystemModalLabel">
+                		<div class="modal fade" id="modifyDevicePop1" role="dialog" aria-labelledby="gridSystemModalLabel">
                     		<div class="modal-dialog" role="document">
                         		<div class="modal-content">
                             		<div class="modal-header">
@@ -974,7 +974,7 @@
                                         		<div class="form-group ">
                                             		<label for="deviceID" class="col-xs-3 control-label">设备ID：</label>
                                             		<div class="col-xs-6 ">
-                                                		<input type="text" class="form-control input-sm duiqi" id="deviceID" placeholder="">
+                                                		<input type="text" class="form-control input-sm duiqi" id="deviceIDModifyInput" placeholder="">
                                             		</div>
                                         		</div>
                                         		<div class="form-group ">
@@ -999,8 +999,8 @@
                                 		</div>
                             		</div>
                             		<div class="modal-footer">
-                                		<button type="button" class="btn btn-xs btn-white" data-dismiss="modal" id ="cancelCapabilityModify">取 消</button>
-                                		<button type="button" class="btn btn-xs btn-green" data-dismiss="modal" id = "confirmCapabilityModify">保 存</button>
+                                		<button type="button" class="btn btn-xs btn-white" data-dismiss="modal" id ="cancelDeviceModify">取 消</button>
+                                		<button type="button" class="btn btn-xs btn-green" data-dismiss="modal" id = "confirmDeviceModify">保 存</button>
                             		</div>
                         		</div>
                         		<!-- /.modal-content -->
@@ -1025,7 +1025,7 @@
                             		</div>
                             		<div class="modal-footer">
                                 		<button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
-                                		<button type="button" class="btn  btn-xs btn-danger" id= "confirmDeleteDevice">确定</button>
+                                		<button type="button" class="btn  btn-xs btn-danger" data-dismiss="modal" id= "confirmDeleteDevice">确定</button>
                             		</div>
                         		</div>
                         		<!-- /.modal-content -->
@@ -1239,6 +1239,10 @@
 		<script src="${basePath}resources/js/manager.showNowBooked.js"></script>
 		<script src="${basePath}resources/js/manager.showHistoryBooked.js"></script>
 		<script src="${basePath}resources/js/manager.showUser.js"></script>
+		
+		<script src="${basePath}resources/js/manager.addDevice.js"></script>
+		<script src="${basePath}resources/js/manager.modifyDevice.js"></script>
+		<script src="${basePath}resources/js/manager.showDevice.js"></script>
 	
 	</body>
 

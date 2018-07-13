@@ -2,9 +2,17 @@
 
 $(document).ready(function(){
 
-	//显示员工工号
-	$("#userIdModifyP").val($("#userId").val());
-	$("#userIdModifyP").attr("disabled", true); //设置为不可编辑
+	
+	//点击左侧修改密码菜单，填上id
+	$("#modifyMyPassMenu").click(function(){
+		
+		//显示员工工号
+		$("#userIdModifyP").val($("#userId").text());
+		//alert($("#userId").text());
+		$("#userIdModifyP").attr("disabled", true); //设置为不可编辑
+	});
+	
+	
 	//提交按钮点击事件
 	$("#modifyPasswordBtn").click(function(){
 		
@@ -30,9 +38,9 @@ $(document).ready(function(){
 			$.ajax({
 		    	type : "post",
 		    	url:"../login/modifyPassword",
-		    	//contentType:"application/json",
-		        //data:JSON.stringify(data),
-		    	data:data,
+		    	contentType:"application/json",
+		        data:JSON.stringify(data),
+		    	//data:data,
 		        success:function(result){
 		        	//返回布尔值  TODO
 		        	alert("修改密码成功！");

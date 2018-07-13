@@ -20,5 +20,7 @@ public interface DeviceDao {
 	List<Device> queryAllDevices() ;
 
 
+	//通过id删除设备
+	boolean deleteDeviceById(@Param("deviceId") String deviceId);
 
 }

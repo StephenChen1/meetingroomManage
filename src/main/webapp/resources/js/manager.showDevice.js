@@ -7,9 +7,9 @@
 	$.showDevice = function(device , i){
 		//表格行字符串
     	var row = '<tr><td>'+ i +
-    				'</td><td>'+result.deviceId +
-    				'</td><td>' +result.deviceName +
-    				'</td><td>' +result.deviceType +
+    				'</td><td>'+device.deviceId +
+    				'</td><td>' +device.name +
+    				'</td><td>' +device.type +
     				'</td></tr>' ;
     			  
     	
@@ -23,12 +23,12 @@ $(document).ready(function(){
 	
 	
 	//点击左侧菜单即可得到所有设备信息
-	$("#").click(function(){
-		
+	$("#showDeviceMenu").click(function(){
+		//alert("点击了看设备");
 		//返回值：所有设备对象数组，包括设备id，设备名，设备型号
 		$.ajax({
 	    	type : "post",
-	    	url:"../device/getAllDevice",
+	    	url:"../device/getAll",
 	    	//contentType:"application/json",
 	        //data:JSON.stringify(data),
 	    	//data:data,

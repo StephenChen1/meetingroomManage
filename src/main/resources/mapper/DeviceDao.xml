@@ -31,6 +31,10 @@
 		from device
 	</select>
 	
-	
+	<!-- deleteDeviceById删除设备 -->
+	<delete id="deleteDeviceById">
+		delete from device
+		where device_id=#{deviceId}
+	</delete>
 	
 </mapper>

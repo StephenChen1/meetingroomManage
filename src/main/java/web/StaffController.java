@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import dtoin.ID;
+import dtoout.CanBooked;
 import entity.Staff;
 import service.JwtService;
 import service.StaffService;
@@ -32,12 +32,19 @@ public class StaffController {
 	private JwtService jwtService;
 
 	// 根据id查找用户信息
-	@RequestMapping("/search")
+	@RequestMapping("/myInfo")
 	@ResponseBody
-	public Staff getStaffTest(@RequestBody ID id) {
-		String id1 = id.getId();
+	public Staff getStaffTest(@CookieValue(value = "token", required = false) String token) {
+		/*String id1 = id.getId();
 		System.out.println("id:" + id);
 		Staff staff = staffService.getStaff(id1);
+		System.out.println("staff:" + staff.getAddress());
+		return staff;*/
+		if (token == null) {
+			return null;
+		}
+		String staffNumber = jwtService.getStaffNum(token);
+		Staff staff = staffService.getStaff(staffNumber);
 		System.out.println("staff:" + staff.getAddress());
 		return staff;
 	}
@@ -135,6 +142,7 @@ public class StaffController {
 		String newStaffNumber = map.get("newStaffNumber").toString();
 		String newName = map.get("newName").toString();
 		String newPhone = map.get("newPhone").toString();
+		String newEmail = map.get("newEmail").toString();
 		String newBirthday = map.get("newBirthday").toString();
 		String newAddress = map.get("newAddress").toString();
 		String newDepartment = map.get("newDepartment").toString();
@@ -144,7 +152,7 @@ public class StaffController {
 				+ "   " + newBirthday + "   " + newAddress + "   "
 				+ newDepartment + "   " + newPosition);*/
 		boolean isOK = staffService.modifyInfo(staffNumber,newStaffNumber,newName,newPhone
-				,newBirthday,newAddress,newDepartment,newPosition);
+				,newEmail,newBirthday,newAddress,newDepartment,newPosition);
 		//System.out.println("ISOK：" + isOK);
 		return isOK;
 	}
@@ -158,5 +166,15 @@ public class StaffController {
 		List<Staff> staffs = staffService.getAllStaff();
 		return staffs ;
 	}
+	
+	
+	//从can_book表得到所有可预约时间
+	@RequestMapping(value = "/getAllCanBooked", method = RequestMethod.POST)
+	@ResponseBody
+	public List<CanBooked> getAllCanBooked(){
+		List<CanBooked> allCanBooked = staffService.getAllCanBooked();
+		return allCanBooked ;
+	}
+	
 
 }
