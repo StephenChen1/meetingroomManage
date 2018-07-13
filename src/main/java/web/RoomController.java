@@ -1,5 +1,10 @@
 package web;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -19,13 +24,22 @@ import dtoin.ModifyDevice;
 import dtoin.MyBookTime;
 import dtoin.SetFreeTime;
 import dtoin.UpdateBook;
+
+import dtoin.SetFreeTime;
+import dtoout.AllBooked;
 import dtoout.AllRoom;
 import entity.RoomDevice;
 import service.BookService;
 import service.JwtService;
 import service.ManagerService;
 
-@RequestMapping(value = "/room", method = RequestMethod.POST)
+import dtoout.BookedTime;
+import entity.RoomDevice;
+import service.ManagerService;
+
+
+
+@RequestMapping(value = "/room", method={RequestMethod.POST,RequestMethod.GET})
 @Controller
 public class RoomController {
 
@@ -37,6 +51,7 @@ public class RoomController {
 	private BookService bookService;
 	@Autowired
 	private JwtService jwtService;
+
 
 	/**
 	 * 新增会议室
@@ -82,8 +97,8 @@ public class RoomController {
 		String roomNumber = modifyDevice.getRoomNumber();
 		List<RoomDevice> roomDeviceList = modifyDevice.getRoomDevice();
 		return managerService.modifyDevice(roomNumber, roomDeviceList);
-	}
-
+	}        
+	
 	/**
 	 * 获取所有会议室信息
 	 * 
@@ -137,6 +152,176 @@ public class RoomController {
 		//更新canBook表
 		List<MyBookTime> list = bookService.updateCanBook(canBookId, bookedTime);
 		return list;
+	}
+	
+	
+	public boolean deleteRoomById(@RequestBody(required=false) Map<String,Object> map) {
+		String roomNumber = map.get("roomNumber").toString();
+		System.out.println(roomNumber);
+		boolean flag=managerService.deleteRoomById(roomNumber);
+		return flag;
+	}
+	
+	/**
+	 * 查看全部员工所有预约记录
+	 * @param 无
+	 * @return List<AllBooked>
+	 */
+	@RequestMapping("/getAll")
+	@ResponseBody
+	public List<AllBooked> getAllBooked(HttpServletRequest request) {
+		List<AllBooked> allBooked=managerDao.getAllBooked();
+		return allBooked;
+	}
+	
+	
+	/**
+	 * 查看历史预约记录
+	 * @param 无
+	 * @return List<AllBooked>
+	 * @throws ParseException 
+	 */
+	@RequestMapping("/getHistoryBooked")
+	@ResponseBody
+	public List<AllBooked> getHistoryBooked(HttpServletRequest request) throws ParseException {
+
+        
+		//直接返回所有预约记录再对结果判断，要是历史预约记录则放入historyBooked中
+		List<AllBooked> allBooked=managerDao.getAllBooked();  //所有预约记录
+		List<AllBooked> historyBooked=new ArrayList<AllBooked>();	//历史预约记录
+		System.out.println("这里是Controller里的getHistoryBooked方法");
+		System.out.println(allBooked.size());
+		for(int i=0;i<allBooked.size();i++){
+			AllBooked allRoom=allBooked.get(i);
+			BookedTime freetime=allRoom.getBookedTime();
+			try{
+				String startDate=freetime.getStartDate();
+				String endDate=freetime.getEndDate();
+				String startTime=freetime.getStartTime();
+				String endTime=freetime.getEndTime();
+				System.out.println("start:"+startDate+" "+startTime);
+				String startDate_Time=startDate+" "+startTime;
+				System.out.println("end:"+endDate+" "+endTime);
+				String endDate_Time=endDate+" "+endTime;
+				
+				SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm"); 
+				Date nowTime = new Date();  
+			    String s = null; 
+			    s = sdf.format(nowTime);  
+			    System.out.println("now:"+s);
+			    Date now=sdf.parse(s);
+				Date bt=sdf.parse(startDate_Time); 
+				Date et=sdf.parse(endDate_Time);
+				
+				//第一种情况，开始日期的开始时间位于now之前或刚好相等且结束日期的结束时间大于now
+				if ((bt.before(now)||bt.equals(now))&&et.after(now)){ 
+					historyBooked.add(allRoom);
+				} 
+				
+				//第二种情况，结束日期的结束时间早于或等于now
+				if (et.before(now)||et.equals(now)){ 
+					historyBooked.add(allRoom);
+				}
+			}catch (NullPointerException e){
+				//当取到BookedTime freetime里的值为null时抛出异常
+				System.out.println("已捕获到NullPointerException异常");
+			}
+			//用于在表数据还没完整前进行测试
+			System.out.println("还没抛出异常时historyBooked的大小："+historyBooked.size());
+		}
+		
+		return historyBooked;
+	}
+	
+	
+	/**
+	 * 查看未来的预约记录
+	 * @param 无
+	 * @return List<AllBooked>
+	 * @throws ParseException 
+	 */
+	@RequestMapping("/getFutureBooked")
+	@ResponseBody
+	public List<AllBooked> getFutureBooked(HttpServletRequest request) throws ParseException {
+		
+		//直接返回所有预约记录再对结果判断，要是未来的预约记录则放入futureBooked中
+		List<AllBooked> allBooked=managerDao.getAllBooked();  //所有预约记录
+		List<AllBooked> futureBooked=new ArrayList<AllBooked>();	//未来预约记录
+		System.out.println("这里是Controller里的getFutureBooked方法");
+		System.out.println(allBooked.size());
+		for(int i=0;i<allBooked.size();i++){
+			AllBooked allRoom=allBooked.get(i);
+			BookedTime freetime=allRoom.getBookedTime();
+			try{
+				String startDate=freetime.getStartDate();
+				String startTime=freetime.getStartTime();
+				System.out.println("start:"+startDate+" "+startTime);
+				String startDate_Time=startDate+" "+startTime;
+				
+				SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm"); 
+				Date nowTime = new Date();  
+			    String s = null; 
+			    s = sdf.format(nowTime);  
+			    System.out.println("now:"+s);
+			    Date now=sdf.parse(s);
+				Date bt=sdf.parse(startDate_Time); 
+				
+				//开始日期的开始时间位于now之后
+				if (bt.after(now)){ 
+					futureBooked.add(allRoom);
+				}
+			}catch (NullPointerException e){
+				//当取到BookedTime freetime里的值为null时抛出异常
+				System.out.println("已捕获到NullPointerException异常");
+			}
+			//用于在表数据还没完整前进行测试
+			System.out.println("还没抛出异常时futureBooked的大小："+futureBooked.size());
+		}
+		return futureBooked;
+	}
+	
+	
+	/**
+	 * 查看对应员工的所有预约记录
+	 * @param roomNumber
+	 * @return List<AllBooked>
+	 */
+	@RequestMapping("/getPersonalBooked")
+	@ResponseBody
+	public List<AllBooked> getPersonalBooked(@RequestBody(required=false) Map<String,Object> map) {
+		String staffNumber = map.get("staffNumber").toString();
+		List<AllBooked> allBooked=managerDao.getPersonalBooked(staffNumber);
+		//注释代码用于测试
+		/*System.out.println("这里是Controller外的staffNumber: " + staffNumber);
+		System.out.println(allBooked.size());
+		for(int i=0;i<allBooked.size();i++){
+			AllBooked allRoom=allBooked.get(i);
+			System.out.println("这里是Controller里的staffNumber: " + staffNumber);
+			System.out.println("allRoom:"+allRoom.getCapability()+"   "+allRoom.getRoomNumber());
+			BookedTime freetime=allRoom.getBookedTime();
+			System.out.println(freetime.getStartDate()+"  "+freetime.getEndDate()+"  "+freetime.getStartTime()+"  "+freetime.getEndTime());
+			System.out.println("\n\n");
+		}*/
+		return allBooked;
+	}
+	
+	/**
+	 * 修改会议室容量
+	 * @param 会议室编号roomNumber
+	 * @param 新容量newCapability
+	 * @return boolean
+	 */
+	@RequestMapping(value = "/modifyCapability", method = RequestMethod.POST)
+	@ResponseBody
+	public boolean modifyPassword(@RequestBody(required=false) Map<String,Object> map) {
+		String roomNumber = map.get("roomNumber").toString();
+		int newCapability = Integer.valueOf(map.get("newCapability").toString());
+		//System.out.println("已进入modifyCapability方法");
+		//System.out.println(roomNumber+"   "+newCapability);
+		//boolean isOK = true;
+		boolean isOK = managerService.modifyCapability(roomNumber,newCapability);
+		//System.out.println("ISOK：" + isOK);
+		return isOK;
 	}
 
 	/**
