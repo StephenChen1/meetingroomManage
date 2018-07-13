@@ -10,6 +10,15 @@ public class Staff {
 	private String address;
 	private String position;
 	private String department;
+	private String email;
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 	public String getDepartment() {
 		return department;

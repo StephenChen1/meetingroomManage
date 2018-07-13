@@ -12,8 +12,10 @@ import javax.mail.internet.MimeMessage;
 
 import org.springframework.stereotype.Service;
 
+import service.MailService;
+
 @Service
-public class MailServiceImpl {
+public class MailServiceImpl implements MailService {
 	// TODO 用IOC的方法简化代码（或考虑单例模式？）
 	// 理论上要有返回值，但是相关方法都是void，因此目前无返回值
 	// 正文内容预计会有修改，如补充预订人、预定会议室号码等，之后可通过修改参数列表对正文内容进行修改
@@ -25,7 +27,7 @@ public class MailServiceImpl {
 	 * @return
 	 * @throws MessagingException
 	 */
-	public void bookedOK(String mailAddress) throws MessagingException {
+	public void bookedOK(String mailAddress, String msg) throws MessagingException {
 		Properties props = new Properties();
 		props.put("mail.smtp.host", "smtp.163.com");
 		props.put("mail.smtp.auth", "true");
@@ -41,9 +43,9 @@ public class MailServiceImpl {
 		message.setRecipient(MimeMessage.RecipientType.TO, toAddress);
 
 		// 主题
-		message.setSubject("会议室预定成功！");
+		message.setSubject(msg);
 		// 正文
-		message.setText("会议室预定成功！");
+		message.setText(msg);
 
 		message.saveChanges(); // implicit with send()
 		// Exception in thread "main" javax.mail.NoSuchProviderException: smtp
@@ -61,7 +63,8 @@ public class MailServiceImpl {
 	 * @param mailAddress
 	 * @return
 	 */
-	public void bookedCancel(String mailAddress) throws MessagingException {
+	@Override
+	public void bookedCancel(String mailAddress, String msg) throws MessagingException {
 		Properties props = new Properties();
 		props.put("mail.smtp.host", "smtp.163.com");
 		props.put("mail.smtp.auth", "true");
@@ -77,9 +80,9 @@ public class MailServiceImpl {
 		message.setRecipient(MimeMessage.RecipientType.TO, toAddress);
 
 		// 主题
-		message.setSubject("会议室预定取消！");
+		message.setSubject(msg);
 		// 正文
-		message.setText("会议室预定取消！");
+		message.setText(msg);
 
 		message.saveChanges(); // implicit with send()
 		// Exception in thread "main" javax.mail.NoSuchProviderException: smtp
