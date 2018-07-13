@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import dao.LoginDao;
+import dao.StaffDao;
 import entity.Login;
+import entity.Staff;
 import service.LoginService;
 
 @Service
@@ -12,6 +14,8 @@ public class LoginServiceImpl implements LoginService {
 
 	@Autowired
 	private LoginDao loginDao;
+	@Autowired
+	private StaffDao staffDao ;
 
 	/**
 	 * 判断登陆是否成功
@@ -30,6 +34,40 @@ public class LoginServiceImpl implements LoginService {
 		}
 	}
 
+	
+	
+	/**
+	 * 返回该id是管理员还是用户
+	 */
+	public String managerOrUser(String staffNumber){
+		Staff staff = staffDao.queryStaffById(staffNumber);
+		//返回参数
+		String position  ;
+		if(staff != null){
+			//查有此人
+			
+			//level为0表示用户，1表示管理员
+			if(staff.getLevel() == 0){
+				position = "user";
+			}else if(staff.getLevel() == 1){
+				position = "manager";
+			}else{
+				//都不是就返回“noPeople"
+				position = "noPeople";
+			}
+			return position ;
+		}else{
+			//查无此人
+			position = "noPeople";
+		}
+		
+		return position ;
+	}
+	
+	
+	
+
+
 	/**
 	 * 修改密码
 	 * @param 员工编号staffNumber
@@ -38,8 +76,8 @@ public class LoginServiceImpl implements LoginService {
 	 * @return boolean
 	 */
 	@Override
-	public boolean modifyPassword(String staffNumber, String oldPass,
-			String newPass) {
+	public boolean modifyPassword(String staffNumber, String oldPass,String newPass) {
 		return loginDao.modifyPassword(staffNumber,oldPass,newPass);
 	}
+
 }

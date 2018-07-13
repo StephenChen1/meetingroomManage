@@ -1,5 +1,7 @@
 package dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import entity.Staff;
@@ -42,4 +44,9 @@ public interface StaffDao {
 	boolean modifyInfo(@Param("staffNumber")String staffNumber,@Param("newStaffNumber")String newStaffNumber, @Param("newName")String newName, @Param("newPhone")String newPhone,
 			@Param("newBirthday")String newBirthday, @Param("newAddress")String newAddress, @Param("newDepartment")String newDepartment,
 			@Param("newPosition")String newPosition);
+
+	//查找所有员工
+	List<Staff> queryAll();
+
+
 }

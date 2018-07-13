@@ -1,6 +1,7 @@
 package web;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
@@ -11,13 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import dtoin.ID;
-import dtoin.LoginForm;
 import entity.Staff;
 import service.JwtService;
 import service.StaffService;
@@ -41,6 +40,26 @@ public class StaffController {
 		Staff staff = staffService.getStaff(id1);
 		System.out.println("staff:" + staff.getAddress());
 		return staff;
+	}
+
+	@RequestMapping("id")
+	@ResponseBody
+	public Map<String, Object> getStaffById(HttpServletRequest request) {
+		String staffNumber = request.getParameter("staffNumber");
+		Staff staff = staffService.getStaff(staffNumber);
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (staff == null) {
+			return map;
+		}
+		map.put("staffNumber", staff.getStaffNumber());
+		map.put("staffName", staff.getName());
+		map.put("level", staff.getLevel());
+		map.put("department", staff.getDepartment());
+		map.put("position", staff.getPosition());
+		map.put("birthday", staff.getBirthday());
+		map.put("phone", staff.getPhone());
+		map.put("address", staff.getAddress());
+		return map;
 	}
 
 	// 仅作JWT测试
@@ -128,6 +147,16 @@ public class StaffController {
 				,newBirthday,newAddress,newDepartment,newPosition);
 		//System.out.println("ISOK：" + isOK);
 		return isOK;
+	}
+	
+	
+	
+	//得到所有员工
+	@RequestMapping(value = "/getAllStaff", method = RequestMethod.POST)
+	@ResponseBody
+	public List<Staff> getAllStaff(){
+		List<Staff> staffs = staffService.getAllStaff();
+		return staffs ;
 	}
 
 }

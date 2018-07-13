@@ -24,4 +24,13 @@
 		set name=#{name},type=#{type}
 		where device_id=#{device_id}
 	</update>
+	
+	<!-- 得到所有设备 queryAllDevices-->
+	<select id="queryAllDevices" resultType="device" parameterType="String">
+		select device_id,name,type
+		from device
+	</select>
+	
+	
+	
 </mapper>

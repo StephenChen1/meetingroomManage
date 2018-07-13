@@ -49,7 +49,7 @@ public class LoginController {
 	 */
 	@RequestMapping(value = "/validate", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> validateLogin(HttpServletRequest request, HttpServletResponse response) {
+	public boolean validateLogin(HttpServletRequest request, HttpServletResponse response) {
 		String staffNumber = request.getParameter("staffNumber");
 		String password = request.getParameter("password");
 		System.out.println(staffNumber);
@@ -58,31 +58,33 @@ public class LoginController {
 		// 理论上后台也要再确认一次，然后返回对应的错误码（但目前懒得弄）
 		if ((staffNumber == null) || (password == null)) {
 			System.out.println("参数不完整");
-			return null;
+			return false;
 		}
 		// 确定是否登陆成功
 		boolean isLogin = loginService.login(staffNumber, password);
-		Staff staff = new Staff();
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("isLogin", isLogin);
+		//Staff staff = new Staff();
+		/*Map<String, Object> map = new HashMap<String, Object>();
+		map.put("isLogin", isLogin);*/
 		if (isLogin) {
 			// 如果登陆成功，创建token并写入cookie中
 			this.writeCookie(response, staffNumber);
-			// 返回前端用户信息
-			staff = staffService.getStaff(staffNumber);
+			/*// 返回前端用户信息
+			staff = staffService.getStaff(staffNumber);*/
 		}
-		map.put("staffNumber", staff.getStaffNumber());
+		/*map.put("staffNumber", staff.getStaffNumber());
 		map.put("staffName", staff.getName());
 		map.put("level", staff.getLevel());
 		map.put("department", staff.getDepartment());
+		map.put("position", staff.getPosition());
 		map.put("birthday", staff.getBirthday());
 		map.put("phone", staff.getPhone());
 		map.put("address", staff.getAddress());
-		return map;
+		return map;*/
+		return isLogin ;
 	}
 
 	/**
-	 * 获取当前登陆用户的staffNumber
+	 * 获取当前登陆用户的所有用户信息
 	 * 
 	 * @param token
 	 * @return
@@ -92,8 +94,22 @@ public class LoginController {
 	public Map<String, String> getCurrentStaff(@CookieValue(value = "token", required = false) String token) {
 		String staffNumber = this.readCookie(token);
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("staffNumber", staffNumber);
+		
+		// 返回前端用户信息
+		Staff staff = staffService.getStaff(staffNumber);
+		
+		map.put("staffNumber", staff.getStaffNumber());
+		map.put("staffName", staff.getName());
+		//int转String
+		String level = String.valueOf(staff.getLevel());
+		map.put("level", level);
+		map.put("department", staff.getDepartment());
+		map.put("position", staff.getPosition());
+		map.put("birthday", staff.getBirthday());
+		map.put("phone", staff.getPhone());
+		map.put("address", staff.getAddress());
 		return map;
+		
 	}
 
 	/**
@@ -103,8 +119,8 @@ public class LoginController {
 	 * @return
 	 */
 	@RequestMapping("/logout")
-	@ResponseBody
-	public Map<String,String> logout(HttpServletRequest request,HttpServletResponse response){
+	
+	public String logout(HttpServletRequest request,HttpServletResponse response){
 		Cookie[] cookies = request.getCookies();
 		for(Cookie cookie : cookies){
             if(cookie.getName().equals("token")){
@@ -114,21 +130,22 @@ public class LoginController {
                 response.addCookie(cookie);
             }
 		}
-		Map<String,String> map = new HashMap<String,String>();
-		map.put("msg", "成功登出");
-		return map;
+		/*Map<String,String> map = new HashMap<String,String>();
+		map.put("msg", "成功登出");*/
+		return "login";
 	}
 
 	// 通过登录验证后定向到管理员或用户界面
 	@RequestMapping("/navigate")
-	public String navigate(HttpServletRequest request, HttpServletResponse response) {
-		String position = request.getParameter("position");
-		String id = request.getParameter("id");
-		System.out.println("position::" + position);
-		System.out.println("id::" + id);
+	public String navigate(@CookieValue(value = "token", required = false) String token) {
+		//转成员工号
+		String staffNumber = this.readCookie(token);
+		//查询属于员工还是管理员
+		String position = loginService.managerOrUser(staffNumber);
+		
 		if (position.equals("user")) {
 			// addCookie(response,"teacher_id",id);
-			System.out.println("返回user界面");
+			//System.out.println("返回user界面");
 			return "user";
 		} else if (position.equals("manager")) {
 			// addCookie(response,"manager_id",id);

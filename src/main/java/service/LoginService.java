@@ -10,6 +10,16 @@ public interface LoginService {
 	 */
 	public boolean login(String staffNumber,String password);
 
+	
+	
+	/**
+	 * 查询是用户还是管理员
+	 * @param staffNumber
+	 * @return
+	 */
+	String managerOrUser(String staffNumber);
+
+
 	/**
 	 * 修改密码
 	 * @param 员工编号staffNumber
@@ -19,4 +29,5 @@ public interface LoginService {
 	 */
 	public boolean modifyPassword(String staffNumber, String oldPass,
 			String newPass);
+
 }

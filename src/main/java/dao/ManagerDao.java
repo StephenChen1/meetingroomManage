@@ -12,8 +12,8 @@ import entity.Device;
 import entity.Staff;
 
 public interface ManagerDao {
-	//TODO 用一个测试一个，测试完标注一下
-	
+	// TODO 用一个测试一个，测试完标注一下
+
 	// 添加设备
 	boolean addDevice(@Param("name") String name, @Param("type") String type);
 
@@ -46,9 +46,15 @@ public interface ManagerDao {
 
 	// 修改会议室时间
 	boolean modifyTimeAvailable(@Param("roomNumber") String roomNumber, @Param("startDate") String startDate,
-			@Param("endDate") String endDate, @Param("startTime") String startTime,
-			@Param("endTime") String endTime);
+			@Param("endDate") String endDate, @Param("startTime") String startTime, @Param("endTime") String endTime);
 
+	// 删除已有会议室所有空闲时间
+	boolean deleteFreeTime(@Param("roomNumber") String roomNumber);
+
+	// 增加会议室空闲时间（与删除配合使用，先删除后增加）
+	boolean addFreeTime(@Param("roomNumber") String roomNumber, @Param("startDate") String startDate,
+			@Param("endDate") String endDate, @Param("startTime") String startTime, @Param("endTime") String endTime);
+	
 	// 修改设备
 	boolean modifyRoomDevice(@Param("roomNumber") String roomNumber, @Param("deviceId") String deviceId,
 			@Param("count") int count);

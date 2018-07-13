@@ -1,5 +1,7 @@
 package service;
 
+import java.util.List;
+
 import entity.Staff;
 
 public interface StaffService {
@@ -11,4 +13,7 @@ public interface StaffService {
 			String newBirthday, String newAddress, String newDepartment,
 			String newPosition);
 
+	//得到所有员工信息
+	List<Staff> getAllStaff();
+	
 }

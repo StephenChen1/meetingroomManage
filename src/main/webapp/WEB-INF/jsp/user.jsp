@@ -95,8 +95,8 @@
                 </div>
                 <div id="personInfor">
 					<p>欢迎您！</p>
-                    <p id="userName">stephen</p>
-					<p id = "userId">10001</p>
+                    <p id="userName"></p>
+					<p id = "userId"></p>
                     <p>
                         <!-- 退出登录按钮 -->
 						<button type="button" class="btn btn-default btn-sm" id = "exitLogin">退出登录</button>
@@ -109,15 +109,15 @@
                 	<span id="topB" class="glyphicon  glyphicon-triangle-bottom  "></span> <span>预约功能</span>
                 </div>
                 <div id="collapseBookedFunction" class="collapse in" aria-expanded="true">
-                	<div class="meun-item" href="#showNowBookedPane" aria-controls="showNowBookedPane" role="tab" data-toggle="tab"><img src="${basePath}resources/images/icon_house_grey.png">预约会议室</div>
-                	<div class="meun-item" href="#showHistoryBookedPane" aria-controls="showHistoryBookedPane" role="tab" data-toggle="tab"><img src="${basePath}resources/images/icon_rule_grey.png">预约记录</div>
+                	<div class="meun-item" id = "userBookedRoom" href="#showNowBookedPane" aria-controls="showNowBookedPane" role="tab" data-toggle="tab"><img src="${basePath}resources/images/icon_house_grey.png">预约会议室</div>
+                	<div class="meun-item" id = "userBookedRecord" href="#showHistoryBookedPane" aria-controls="showHistoryBookedPane" role="tab" data-toggle="tab"><img src="${basePath}resources/images/icon_rule_grey.png">预约记录</div>
             	</div>
             	<!-- 用户管理折叠 -->
             	<div class="meun-title" onClick="changeA()" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseStaffFunction" aria-expanded="true" aria-controls="collapseOne">
                 	<span id="top111" class="glyphicon  glyphicon-triangle-bottom  "></span> <span>个人信息</span>
                 </div>
                 <div id="collapseStaffFunction" class="collapse " aria-expanded="true">
-                	<div class="meun-item" href="#modifyInformation" aria-controls="modifyInformation" role="tab" data-toggle="tab"><img src="${basePath}resources/images/icon_house_grey.png">修改个人信息</div>
+                	<div class="meun-item" id = "modifyMyInfoMenu" href="#modifyInformation" aria-controls="modifyInformation" role="tab" data-toggle="tab"><img src="${basePath}resources/images/icon_house_grey.png">修改个人信息</div>
                 	<div class="meun-item" href="#modifyPassword" aria-controls="modifyPassword" role="tab" data-toggle="tab"><img src="${basePath}resources/images/icon_rule_grey.png">修改密码</div>
                 </div>
             	</div>
@@ -144,11 +144,11 @@
                         		<button class="btn btn-yellow btn-xs" >预约会议室</button>
                     		</div>
                     		<div class="col-xs-7">
-                        		<input type="text" id = "bookedDateInput" class="form-control input-sm" placeholder="输入日期">
-                        		<input type="text" id = "bookedTimeInput"class="form-control input-sm" placeholder="输入时间">
-                        		<button class="btn btn-white btn-xs ">查 询</button>
-                        		<!-- 此时为了测试，将此button的id设置为test，为了避免测试完成后忘了删除id对前端页面逻辑有影响，作此记录 -->
-                        		<!-- <button id="test" class="btn btn-white btn-xs ">根据会议室号查询会议室</button> -->
+
+                        		<input type="date" id = "bookedDateInput" class="form-control input-sm" placeholder="输入日期">
+                        		<input type="time" id = "bookedTimeInput"class="form-control input-sm" placeholder="输入时间">
+                        		<button class="btn btn-white btn-xs ">查 询 </button>
+
                     		</div>
                     		<div class="col-lg-3  col-xs-3" style=" padding-right: 40px;text-align: right;">
                         		<label for="sortNowBooked">排序:&nbsp;</label>
@@ -163,7 +163,7 @@
                 		<div class="data-div">
                     		<!--自己写table -->
 							<table class = "table" id = "bookedTable">
-							   <caption><div align="center" class="text-success" id = "modifyMeetingTableTip">可预约信息</div></caption>
+							   <caption><div align="center" class="text-success" id = "bookedTableTip">可预约信息</div></caption>
 							   <thead class="row tableHeader">
 							     <tr>
 								    <th class="col-xs-1">编号</th>
@@ -208,38 +208,37 @@
                             		<div class="modal-body">
                                 		<div class="container-fluid">
                                     		<form class="form-horizontal">
-                                        		<div class="form-group ">
-                                            		<label for="deviceID" class="col-xs-3 control-label">会议室号：</label>
-                                            		<div class="col-xs-6 ">
-                                                		<input type="text" class="form-control input-sm duiqi" id="deviceID" placeholder="">
-                                            		</div>
-                                        		</div>
-                                        		<div class="form-group ">
-                                            		<label for="startDateBooked" class="col-xs-3 control-label">开始日期：</label>
-                                            		<div class="col-xs-6 ">
-                                                		<input type="text" class="form-control input-sm duiqi" id="startDateBooked" placeholder="">
-                                            		</div>
-                                        		</div>
-                                        		<div class="form-group ">
-                                            		<label for="endDateBooked" class="col-xs-3 control-label">结束日期：</label>
-                                            		<div class="col-xs-6 ">
-                                                		<input type="text" class="form-control input-sm duiqi" id="endDateBooked" placeholder="">
-                                            		</div>
-                                        		</div>
-                                        		<div class="form-group ">
-                                            		<label for="startTimrBooked" class="col-xs-3 control-label">开始时间：</label>
-                                            		<div class="col-xs-6 ">
-                                                		<input type="text" class="form-control input-sm duiqi" id="startTimrBooked" placeholder="">
-                                            		</div>
-                                        		</div>
-                                        		<div class="form-group ">
-                                            		<label for="endTimeBooked" class="col-xs-3 control-label">结束时间：</label>
-                                            		<div class="col-xs-6 ">
-                                                		<input type="text" class="form-control input-sm duiqi" id="endTimeBooked" placeholder="">
-                                            		</div>
-                                        		</div>
-                                        		
-                                    		</form>
+                                        			<div class="form-group ">
+                                            			<label for="roomNumberBooked" class="col-xs-3 control-label">会议室号：</label>
+                                            			<div class="col-xs-6 ">
+                                                			<input type="text" class="form-control input-sm duiqi" id="roomNumberBooked" >
+                                            			</div>
+                                        			</div>
+                                        			<div class="form-group ">
+                                            			<label for="startDateBooked" class="col-xs-3 control-label">开始日期：</label>
+                                            			<div class="col-xs-6 ">
+                                                			<input type="date" class="form-control input-sm duiqi" id="startDateBooked" >
+                                            			</div>
+                                        			</div>
+                                        			<div class="form-group ">
+                                            			<label for="endDateBooked" class="col-xs-3 control-label">结束日期：</label>
+                                            			<div class="col-xs-6 ">
+                                                			<input type="date" class="form-control input-sm duiqi" id="endDateBooked" >
+                                            			</div>
+                                        			</div>
+                                        			<div class="form-group ">
+                                            			<label for="startTimeBooked" class="col-xs-3 control-label">开始时间：</label>
+                                            			<div class="col-xs-6 ">
+                                                			<input type="time" class="form-control input-sm duiqi" id="startTimeBooked" >
+                                            			</div>
+                                        			</div>
+                                        			<div class="form-group ">
+                                            			<label for="endTimeBooked" class="col-xs-3 control-label">结束时间：</label>
+                                            			<div class="col-xs-6 ">
+                                                			<input type="time" class="form-control input-sm duiqi" id="endTimeBooked" >
+                                            			</div>
+                                        			</div>                                       		
+                                    			</form>
                                 		</div>
                             		</div>
                             		<div class="modal-footer">
@@ -328,6 +327,18 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
+                            		<label for="myDepartment" class="col-xs-4 control-label">部门：</label>
+                            		<div class="col-xs-5">
+                                		<input type="text" class="form-control input-sm duiqi" id="myDepartment" placeholder="" style="margin-top: 7px;">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                            		<label for="myPosition" class="col-xs-4 control-label">职位：</label>
+                            		<div class="col-xs-5">
+                                		<input type="text" class="form-control input-sm duiqi" id="myPosition" placeholder="" style="margin-top: 7px;">
+                                    </div>
+                                </div>
+                                <div class="form-group">
                             		<label for="myPhone" class="col-xs-4 control-label">手机：</label>
                             		<div class="col-xs-5">
                                 		<input type="text" class="form-control input-sm duiqi" id="myPhone" placeholder="" style="margin-top: 7px;">
@@ -337,6 +348,12 @@
                             		<label for="myBirthday" class="col-xs-4 control-label">生日：</label>
                             		<div class="col-xs-5">
                                 		<input type="text" class="form-control input-sm duiqi" id="myBirthday" placeholder="" style="margin-top: 7px;">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                            		<label for="myAddress" class="col-xs-4 control-label">住址：</label>
+                            		<div class="col-xs-5">
+                                		<input type="text" class="form-control input-sm duiqi" id="myAddress" placeholder="" style="margin-top: 7px;">
                                     </div>
                                 </div>
                                 
@@ -367,9 +384,9 @@
                 		<div style="padding: 50px 0;margin-top: 50px;background-color: #fff; text-align: right;width: 420px;margin: 50px auto;">
                     		<div class="form-horizontal">
                         		<div class="form-group">
-                            		<label for="userId" class="col-xs-4 control-label">ID：</label>
+                            		<label for="userIdModifyP" class="col-xs-4 control-label">ID：</label>
                             		<div class="col-xs-5">
-                                		<input type="text" class="form-control input-sm duiqi" id="userIdModify" placeholder="" style="margin-top: 7px;">
+                                		<input type="text" class="form-control input-sm duiqi" id="userIdModifyP" placeholder="" style="margin-top: 7px;">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -562,6 +579,8 @@
  		</div>
 
 		<script src="${basePath}resources/js/jquery.nouislider.js"></script>
+		<script src="${basePath}resources/js/exitLogin.js"></script>
+		<script src="${basePath}resources/js/user.commom.js"></script>
 	</body>
 
 </html>

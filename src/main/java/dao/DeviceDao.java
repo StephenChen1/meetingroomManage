@@ -15,4 +15,10 @@ public interface DeviceDao {
 	
 	//修改设备
 	boolean modifyDevice(@Param("device_id") String device_id,@Param("name") String name,@Param("type") String type);
+
+	//得到所有设备
+	List<Device> queryAllDevices() ;
+
+
+
 }

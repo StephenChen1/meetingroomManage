@@ -13,6 +13,7 @@ public interface LoginDao {
 	 */
 	Login getByID(@Param("staffNumber") String staffNumber);
 
+
 	/**
 	 * 修改密码
 	 * @param 员工编号staffNumber

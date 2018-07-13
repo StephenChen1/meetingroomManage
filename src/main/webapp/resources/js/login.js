@@ -1,9 +1,11 @@
 (function ($) {
         //函数定义
-        $.navigate = function (position,id) {
+        $.navigate = function () {
             //函数内容
         	//alert("position:" + position);
-        	var url = "./navigate?position="+position+"&id="+id ;
+        	//现在不靠传身份确定跳转到哪了，后台判断cookie
+        	var url = "./navigate";
+        	//var url = "./navigate?position="+position+"&id="+id ;
     		//把请求转发
         	window.location.href=url;
         }
@@ -18,21 +20,22 @@ $(document).ready(function(){
     //alert("点击了登录");
     var id = $("#userId").val();
     var password = $("#password").val();
-    var position = $("input[name='position']:checked").val();
+    /*var position = $("input[name='position']:checked").val();*/
     console.log("id:" + id);
     console.log("password:" + password);
-    console.log("position:" + position);
+    /*console.log("position:" + position);*/
     var data = {
-    	  position:position,
-      	  id:id,
+    	  staffNumber:id,
       	  password:password
     }
     
     $.ajax({
     	type : "post",
     	url:"validate",
-    	contentType:"application/json",
-        data:JSON.stringify(data),
+    	//contentType:"application/json",
+    	//contentType:"application/x-www-form-urlencoded",
+        //data:JSON.stringify(data),
+    	data:data,
         success:function(result){
         	
         
@@ -42,9 +45,8 @@ $(document).ready(function(){
         	
         	if(result){
         		//alert("true");
-        		//能登录，转到相应页面,调用自定义函数
-//        		var url = "./navigate?position="+position ;
-        		$.navigate(position,id);
+        		//能登录，转到相应页面,调用自定义函数,后台判断cookie属于哪种身份，就转到那个页面
+        		$.navigate();
         	}else if(!result){
         		//密码或账号错误，出现提示
         		//alert("false");
