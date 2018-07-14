@@ -19,6 +19,13 @@
 		set password=#{newPass} 
 		where staff_number=#{staffNumber} and password=#{oldPass}
 	</update>
+	
+	<!-- 强制修改密码 -->
+	<update id="forceModifyPassword">
+		update login 
+		set password=#{newPass} 
+		where staff_number=#{staffNumber} 
+	</update>
 
 </mapper>
   

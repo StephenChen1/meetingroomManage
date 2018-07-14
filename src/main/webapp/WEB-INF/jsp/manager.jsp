@@ -92,15 +92,15 @@
                 	<div class="meun-item" id="showRoomDiv" href="#showRoomPane" aria-controls="showRoomPane" role="tab" data-toggle="tab"><img src="${basePath}resources/images/icon_user_grey.png">查看会议室</div>
                 </div>
                 <!-- 预约管理折叠 -->
-                <div class="meun-title" onClick="changeA()" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseBookedFunction" aria-expanded="true" aria-controls="collapseOne">
+                <div class="meun-title"  role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseBookedFunction" aria-expanded="true" aria-controls="collapseOne">
                 	<span id="topB" class="glyphicon  glyphicon-triangle-bottom  "></span> <span>预约管理</span>
                 </div>
                 <div id="collapseBookedFunction" class="collapse " aria-expanded="true">
                 	<div class="meun-item" id = "nowBookedMenu" href="#showNowBookedPane" aria-controls="showNowBookedPane" role="tab" data-toggle="tab"><img src="${basePath}resources/images/icon_house_grey.png">查看当前预约</div>
-                	<div class="meun-item" id = "historyBookedMenu" href="#showHistoryBookedPane" aria-controls="showHistoryBookedPane" role="tab" data-toggle="tab"><img src="${basePath}resources/images/icon_rule_grey.png">查看预约记录</div>
+                	<div class="meun-item" id = "historyBookedMenu" href="#showHistoryBookedPane" aria-controls="showHistoryBookedPane" role="tab" data-toggle="tab"><img src="${basePath}resources/images/icon_rule_grey.png">查看历史预约</div>
             	</div>
             	<!-- 用户管理折叠 -->
-            	<div class="meun-title" onClick="changeA()" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseStaffFunction" aria-expanded="true" aria-controls="collapseOne">
+            	<div class="meun-title"  role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseStaffFunction" aria-expanded="true" aria-controls="collapseOne">
                 	<span id="top111" class="glyphicon  glyphicon-triangle-bottom  "></span> <span>用户管理</span>
                 </div>
                 <div id="collapseStaffFunction" class="collapse " aria-expanded="true">
@@ -108,7 +108,7 @@
                 	<div class="meun-item" id="modifyPassM" href="#modifyPassword" aria-controls="modifyPassword" role="tab" data-toggle="tab"><img src="${basePath}resources/images/icon_rule_grey.png">修改密码</div>
                 </div>
                 <!-- 设备管理折叠 -->
-                <div class="meun-title" onClick="changeA()" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseDeviceFunction" aria-expanded="true" aria-controls="collapseOne">
+                <div class="meun-title"  role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseDeviceFunction" aria-expanded="true" aria-controls="collapseOne">
                 	<span id="topB" class="glyphicon  glyphicon-triangle-bottom  "></span> <span>设备管理</span>
                 </div>
                 <div id="collapseDeviceFunction" class="collapse " aria-expanded="true">
@@ -741,21 +741,7 @@
 								 </tr>
 							   </thead>
 							   <tbody class="tablebody" id = "showHistoryBookedBody">
-							      <tr>
-							         <td>1</td>
-							         <td>
-							         	<!-- 可以点击弹出框查看预约员工的详情 -->
-							            <p  style = "cursor:pointer;" data-toggle="modal" data-target="#showStaffDetailPop">张浩晖(9999)</p>	
-							         </td>
-							         <td>
-							               <!-- 可以点击查看该会议室详情 -->
-							               <p  style = "cursor:pointer;" data-toggle="modal" data-target="#showRoomDetailPop">10001</p>
-							         </td>
-							         <td>
-							         	 2018-07-21~2018-08-25 09:30~16:00<br>
-							         </td>
-							         <td class ="text-danger">已取消</td>
-							      </tr>
+							     
 							   </tbody>
 							</table>
                 		</div>
@@ -828,13 +814,13 @@
                                 <div class="form-group">
                                 	<label for="sKnot" class="col-xs-4 control-label">新密码：</label>
                             		<div class="col-xs-5">
-                                		<input type="text" class="form-control input-sm duiqi" id="newPassword1" placeholder="" style="margin-top: 7px;">
+                                		<input type="password" class="form-control input-sm duiqi" id="newPassword1" placeholder="" style="margin-top: 7px;">
                             		</div>
                         		</div>
                         		<div class="form-group">
                             		<label for="sKnot" class="col-xs-4 control-label" >确认密码：</label>
                             		<div class="col-xs-5">
-                                		<input type="text" class="form-control input-sm duiqi" id="defineNewPassword1" placeholder="" style="margin-top: 7px;">
+                                		<input type="password" class="form-control input-sm duiqi" id="defineNewPassword1" placeholder="" style="margin-top: 7px;">
                             		</div>
                         		</div>
                         		<div class="form-group text-right">
@@ -862,10 +848,10 @@
 							   <caption><div align="center" class="text-success" id = "teachTableTip">设备信息</div></caption>
 							   <thead class="row tableHeader">
 							     <tr>
-								    <th class="col-xs-3">编号</th>
-									<th class="col-xs-3">设备id</th>
-									<th class="col-xs-3">设备名</th>
-									<th class="col-xs-3">型号</th>
+								    <th class="col-xs-4">编号</th>
+									<!-- <th class="col-xs-3">设备id</th> -->
+									<th class="col-xs-4">设备名</th>
+									<th class="col-xs-4">型号</th>
 								 </tr>
 							   </thead>
 							   <tbody class="tablebody" id = "addDeviceBody">
@@ -1239,7 +1225,7 @@
 		<script src="${basePath}resources/js/manager.showNowBooked.js"></script>
 		<script src="${basePath}resources/js/manager.showHistoryBooked.js"></script>
 		<script src="${basePath}resources/js/manager.showUser.js"></script>
-		
+		<script src="${basePath}resources/js/manager.modifyPass.js"></script>
 		<script src="${basePath}resources/js/manager.addDevice.js"></script>
 		<script src="${basePath}resources/js/manager.modifyDevice.js"></script>
 		<script src="${basePath}resources/js/manager.showDevice.js"></script>

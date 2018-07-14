@@ -206,4 +206,20 @@ public class LoginController {
 		return isOK;
 	}
 	
+	
+	//管理员修改密码，即强制修改密码
+	@RequestMapping(value = "/managerModifyPass", method = RequestMethod.POST)
+	@ResponseBody
+	public boolean managerModifyPass(@RequestBody(required=false) Map<String,Object> map) {
+		String staffNumber = map.get("staffNumber").toString();
+		
+		String newPass = map.get("newPassword").toString();
+		
+		boolean isOK = loginService.managerModifyPassword(staffNumber,newPass);
+		//System.out.println("ISOK：" + isOK);
+		return isOK;
+	}
+	
+	
+	
 }

@@ -54,7 +54,7 @@ $(document).ready(function(){
 		//从后台得到所有当前预约记录数据
 		$.ajax({
 	    	type : "post",
-	    	url:"../room/getAll",
+	    	url:"../room/getFutureBooked",
 	    	//contentType:"application/json",
 	        //data:JSON.stringify(data),
 	    	//data:data,

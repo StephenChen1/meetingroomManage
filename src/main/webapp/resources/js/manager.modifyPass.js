@@ -15,21 +15,28 @@ $(document).ready(function(){
 		//比较新密码和确认新密码是否相同
 		if(newPassword == defineNewPassword){
 			//相等则封装参数，传数据
-			var dats = {
+			var data = {
 					staffNumber : staffNumber,
 					newPassword : newPassword
 			}
 			//传数据，修改密码
 			$.ajax({
 		    	type : "post",
-		    	url:"../login/modifyPass",
-		    	//contentType:"application/json",
-		        //data:JSON.stringify(data),
-		    	data:data,
+		    	url:"../login/managerModifyPass",
+		    	contentType:"application/json",
+		        data:JSON.stringify(data),
+		    	//data:data,
 		        success:function(result){
 		        	//返回布尔值，
+		        	result = JSON.parse(result);
 		        	if(result){
 		        		alert("修改成功！");
+		        		//清空输入框
+		        		$("#userIdModifyP").val("");
+		        		$("#newPassword1").val("");
+		        		$("#defineNewPassword1").val("");
+		        	}else{
+		        		alert("修改失败");
 		        	}
 		        }
 			});

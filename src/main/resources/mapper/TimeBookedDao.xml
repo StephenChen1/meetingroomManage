@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.TimeBookedDao">
+	<!-- 插入一条新记录 -->
+	<insert id="addTimeBooked">
+		insert into time_booked
+		(time_booked_id, start_date, end_date, start_time, end_time)
+		values
+		(#{timeBookedId}, #{startDate}, #{endDate}, #{startTime}, #{endTime})
+	</insert>
+</mapper>

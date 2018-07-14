@@ -80,4 +80,13 @@ public class LoginServiceImpl implements LoginService {
 		return loginDao.modifyPassword(staffNumber,oldPass,newPass);
 	}
 
+
+
+	//管理员修改密码，不需要原密码
+	@Override
+	public boolean managerModifyPassword(String staffNumber, String newPass) {
+		boolean modifySuccess = loginDao.forceModifyPassword(staffNumber, newPass);
+		return modifySuccess;
+	}
+
 }

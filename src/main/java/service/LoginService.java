@@ -30,4 +30,9 @@ public interface LoginService {
 	public boolean modifyPassword(String staffNumber, String oldPass,
 			String newPass);
 
+	
+	//管理员强制修改用户密码
+	boolean managerModifyPassword(String staffNumber , String newPass);
+	
+	
 }

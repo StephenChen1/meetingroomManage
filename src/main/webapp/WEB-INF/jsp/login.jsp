@@ -19,6 +19,7 @@
 		<!--Google Fonts-->
 		<!--<link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 		--><!--Google Fonts-->
+		
 	</head>
 	<body>
 		<!--header start here-->
@@ -65,7 +66,10 @@
 				</div>
 			</div>
 			<p class="copy">© 2018 胖猪旭炮蕉</p>
-     </div>		
+     </div>	
+     
+     
+     	
     <!--header start here-->
    </body>
    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
@@ -73,4 +77,5 @@
 	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 	<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="${basePath}resources/js/login.js"  type="text/javascript"></script>
+	
 </html>

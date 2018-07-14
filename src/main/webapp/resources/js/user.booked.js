@@ -179,15 +179,47 @@ $(document).ready(function(){
 		//得到结束时间
 		var endTime = $("#endTimeBooked").val();
 		
+		//比较：结束时间不能小于开始时间
+		//var starttime = $('#txtStorageTimeStart').val();
+		//var endtime = $('#txtStorageTimeEnd').val();
+		//var start = new Date(startDate.replace("-", "/").replace("-", "/"));
+		//var end = new Date(endDate.replace("-", "/").replace("-", "/"));
+		/*if(end<start){  
+			return false;  
+		} */
+		//alert("start: "+ start);
+		//alert("end:" + end);
+		//判断结束时间不能大于开始时间
+		var start = startDate + " " + startTime ;
+		var end = endDate + " " + endTime ;
+		//开始时间转换为标准日期
+		var startT = start.replace("-","/");//替换字符，变成标准格式  
+		var startD = new Date(Date.parse(startT)); 
+		//结束时间转换为结束日期
+		var endT = endDate + " " + endTime ;
+		var endD = new Date(Date.parse(endT));
+		
+		//alert(startD);
+		//alert(endD);
+		//另外，判断24小时时间
+		var date = new Date();  
+	    var a = startTime.split(":");  
+	    var b = endTime.split(":");  
+	  
+		
+		
+		if(end >= start && date.setHours(a[0],a[1]) < date.setHours(b[0],b[1])){
+			var myBookTime = new Object();
+			myBookTime.startDate = startDate ;
+			myBookTime.endDate = endDate ;
+			myBookTime.startTime = startTime ;
+			myBookTime.endTime = endTime ;
 		
 			//封装参数
 			var data = {
-					roomNumber:roomNumber ,
-					timeId:timeId,
-					startDate:startDate,
-					endDate:endDate,
-					startTime:startTime,
-					endTime:endTime
+					
+					canBookId:timeId,
+					myBookTime:myBookTime 
 			}
 			
 			
@@ -202,19 +234,22 @@ $(document).ready(function(){
 			//发送该预约记录给后台,预约
 			$.ajax({
 		    	type : "post",
-		    	url:"../booked/commitOne",
-		    	//contentType:"application/json",
-		        //data:JSON.stringify(data),
-		    	data:data,
+		    	url:"../room/book",
+		    	contentType:"application/json",
+		        data:JSON.stringify(data),
+		    	//data:data,
 		        success:function(result){
 		        	//TODO返回布尔值
-		        	if(result.length > 0){
+		        	//if(result.length > 0){
 		        		//返回的是数组，但数组可能为空
 		        		alert("预约已提交");
-		        	}
+		        	//}
 		        }
 			});
-			
+		}else{
+			//提示结束时间不能小于开始时间
+			alert("结束时间不能早于开始时间");
+		}
 		
 	});
 	

@@ -24,11 +24,10 @@ $(document).ready(function(){
 	    	data:data,
 	        success:function(result){
 	        	//返回该设备信息，显示在表格上
-	        	//表格行字符串
+	        	//表格行字符串,设备id是假的
 	        	var row = '<tr><td>'+ 1 +
-	        				'</td><td>'+" "+
-	        				'</td><td>' +result.deviceName +
-	        				'</td><td>' +result.deviceType +				
+	        				'</td><td>' +deviceName +
+	        				'</td><td>' +deviceType +				
 	        			  '</td></tr>';
 	        	//先删除表格原内容
 	        	$("#addDeviceBody").find("tr").remove();

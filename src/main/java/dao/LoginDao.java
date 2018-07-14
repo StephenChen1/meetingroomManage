@@ -23,4 +23,9 @@ public interface LoginDao {
 	 */
 	boolean modifyPassword(@Param("staffNumber")String staffNumber, @Param("oldPass")String oldPass, @Param("newPass")String newPass);
 
+	//强制修改密码，不需要原密码
+	boolean forceModifyPassword(@Param("staffNumber")String staffNumber, @Param("newPass")String newPass);
+	
+	
+	
 }
